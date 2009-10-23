@@ -1,0 +1,9 @@
+Options +Indexes
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,QSA,L]
+
+RewriteRule ^(..)/(.*)/(.*)    /index.php?lang=$1&group=$2&id=$3 [NC,L]
+RewriteRule ^(..)/              /index.php?lang=$1 [NC,QSA,L]
