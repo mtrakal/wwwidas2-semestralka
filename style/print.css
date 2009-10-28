@@ -1,0 +1,315 @@
+/* 
+    Document   : print
+    Created on : 23.10.2009, 2:56:00
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/* Header */
+
+#header {
+    display:none;
+}
+
+/* Logo */
+
+#logo {
+    display:none;
+}
+
+/* Search */
+
+#search {
+    float: right;
+    width: 280px;
+    height: 60px;
+    padding: 20px 0px 0px 0px;
+    background: #E2E2E2;
+    border-bottom: 4px solid #FFFFFF;
+}
+
+#search form {
+    height: 41px;
+    margin: 0;
+    padding: 10px 0 0 20px;
+}
+
+#search fieldset {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+#search-text {
+    width: 170px;
+    padding: 6px 5px 2px 5px;
+    border: 1px solid #DEDEDE;
+    background: #FFFFFF;
+    text-transform: lowercase;
+    font: normal 11px Arial, Helvetica, sans-serif;
+    color: #5D781D;
+}
+
+#search-submit {
+    width: 50px;
+    height: 22px;
+    border: none;
+    background: #B9B9B9;
+    color: #000000;
+}
+
+#banner {
+    display:none;
+}
+
+/* Menu */
+
+#menu {
+    display:none;
+}
+
+/* Page */
+
+#page {
+}
+
+/* Content */
+
+#content ul ul {
+    list-style: disc;
+    list-style-position: inside;
+    padding: 0 0 10px 10px;
+}
+
+#content ul ul ul {
+    padding-left: 20px;
+}
+
+strong {
+    font-weight: bold;
+}
+
+#content {
+}
+
+.post {
+}
+
+.post-bgtop {
+}
+
+.post-bgbtm {
+}
+
+.post .title {
+    height: 30px;
+    margin-bottom: 13px;
+    padding: 0px;
+    letter-spacing: -.5px;
+    font-size: 36px;
+}
+
+.post .title a {
+    border: none;
+}
+
+.post .meta {
+    display:none;
+}
+
+.post .meta .date {
+    float: left;
+}
+
+.post .meta .posted {
+    float: right;
+}
+
+.post .meta a {
+}
+
+.post .entry {
+    padding: 25px 0px 0px 0px;
+    text-align: justify;
+}
+
+.links {
+    display:none;
+}
+.csfdimdb {
+    padding-top: 10px;
+    text-align: right;
+}
+
+.edit {
+    display:none;
+}
+
+.borrow {
+    display:none;
+}
+
+
+/* Sidebar */
+
+#sidebar {
+    float: right;
+    width: 273px;
+    padding: 0px;
+}
+
+#sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#sidebar li {
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar li ul {
+    margin: 0px 0px;
+    padding-bottom: 20px;
+}
+
+#sidebar li li {
+    line-height: 25px;
+    margin: 0px;
+    padding: 2px 0px;
+    border-left: none;
+}
+
+#sidebar li li div, #sidebar li li span {
+    height: 19px;
+    margin-right: 16px;
+    padding: 4px 12px;
+    font-size: 12px;
+}
+
+#sidebar li li div a, #sidebar li li span a {
+}
+
+#sidebar ol {
+    padding-left: 10px;
+    list-style: decimal;
+    list-style-position: inside;
+}
+
+#sidebar h2 {
+    margin-top: 8px;
+    height: 65px;
+    letter-spacing: -.5px;
+    font-size: 28px;
+}
+
+#sidebar p {
+    margin: 0 0px;
+    padding: 0px 0px 30px 0px;
+    text-align: justify;
+}
+
+#sidebar p strong {
+}
+
+#sidebar a {
+    border: none;
+}
+
+#sidebar a:hover {
+}
+
+/* Calendar */
+
+#calendar {
+}
+
+#calendar_wrap {
+    padding: 20px;
+}
+
+#calendar table {
+    width: 100%;
+}
+
+#calendar tbody td {
+    text-align: center;
+}
+
+#calendar #next {
+    text-align: right;
+}
+
+/* Footer */
+
+#footer-content {
+    display:none;
+}
+
+#footer-content .column1 {
+    display:none;
+}
+
+#footer-content .column2 {
+    display:none;
+}
+
+#footer-content h2 {
+    padding-bottom: 10px;
+    font-size: 22px;
+}
+
+#footer-content strong {
+}
+
+#footer-content a {
+}
+
+#footer-content a:hover {
+}
+
+.list li {
+    margin-bottom: 6px;
+}
+
+#footer {
+    display:none;
+}
+
+#footer p {
+    margin: 0;
+    line-height: normal;
+    font-size: 12px;
+    text-align: center;
+    color: #82A2B9;
+}
+
+#footer a {
+    text-decoration: underline;
+}
+
+/* Trtkal's parts */
+#lang_flags {
+    position: fixed;
+    top: 0.5em;
+    right: 0.5em;
+}
+
+.cleaner.both {
+    clear: both;
+}
+
+.cleaner.left {
+    clear: left;
+}
+
+.cleaner.right {
+    clear: right;
+}
