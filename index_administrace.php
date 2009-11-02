@@ -2,8 +2,9 @@
 include_once "./inc/Sheader.php";
 ?>
                     <li><a href="/index.php">Hlavní stránka</a></li>
-                    <li class="current_page_item"><a href="/index_filmoteka.php">Seznam filmů</a></li>
-                    <li><a href="/inc/Login.php?TB_iframe=true&amp;height=200&amp;width=350" class="thickbox">Administrace</a></li>
+                    <li><a href="/index_filmoteka.php">Seznam filmů</a></li>
+                    <li class="current_page_item"><a href="/inc/AddUser.php?TB_iframe=true&amp;height=200&amp;width=350" class="thickbox">Administrace</a></li>
+                    <li class="current_page_item"><a href="/inc/AddGenre.php?TB_iframe=true&amp;height=200&amp;width=350" class="thickbox">Administrace</a></li>
                 </ul>
             </div>
             <!-- end #menu -->

@@ -1,0 +1,97 @@
+/* 
+    Document   : screen
+    Created on : 23.10.2009, 2:56:58
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+/*
+Design by Free CSS Templates
+http://www.freecsstemplates.org
+Released for free under a Creative Commons Attribution 2.5 License
+*/
+* {
+    line-height: 1.4em;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+html, body {
+    margin: 9px 0px 0px 0px;
+    padding: 0;
+    background: #F7F7F7 url(/style/img/img02.jpg) repeat-x bottom;
+    font-size: 14px;
+    color: #5A554E;
+	 min-height: 200px;
+}
+input[type=button], input[type=submit]{
+	font-size: 11px;
+	padding: 1px 5px;
+	margin-top: 10px;
+}
+
+h1, h2, h3 {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+    color: #32639A;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.6em;
+}
+#modal {
+	margin: 0px auto;
+	text-align: center;
+}
+#modal form {
+	margin: 0px auto;
+	text-align: right;
+}
+#modal input[type=text],
+#modal input[type=password],
+select {
+	border: none;
+	margin: 0px 0px 0px 5px;
+	width: 120px;
+}
+#modal input {
+	font-size: 12px;
+}
+.center {
+	text-align: center;
+}
+.req {
+	color: #b90000;
+	font-weight: bold;
+}
+#modal form#add_user {
+	width: 230px;
+}
+#modal form#add_address {
+	width: 230px;
+}
+#modal form#add_borrower {
+	width: 230px;
+}
+#modal form#add_genre {
+	width: 230px;
+}
+#modal form#login {
+	width: 230px;
+}
