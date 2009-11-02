@@ -53,8 +53,20 @@ include_once "./inc/Sheader.php";
                         <li>
                             <h2>Statistiky databáze</h2>
                             <ul>
-                                <li><div>Celkem filmů</div>99 241</li>
-                                <li><div>Registrovaných uživatelů</div>15</li>
+                                <li><div>Celkem filmů</div>
+<?php
+    require_once './classes/Movie.php';
+    $movie = new Movie();
+    echo $movie->count();
+?>
+                                </li>
+                                <li><div>Registrovaných uživatelů</div>
+<?php
+    require_once './classes/User.php';
+    $user = new User();
+    echo $user->count();
+?>
+                                </li>
                                 <li><div>Nejpůjčovanější filmy</div>
                                     <ol>
                                         <li>Amélie z Montmartru</li>
