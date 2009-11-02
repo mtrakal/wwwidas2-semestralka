@@ -1,9 +1,13 @@
 <?php
-include_once "./inc/header.php";
+include_once "./inc/Sheader.php";
 ?>
-                    <li class="current_page_item"><a href="/index_.php">Hlavní stránka</a></li>
+                    <li class="current_page_item"><a href="/index.php">Hlavní stránka</a></li>
                     <li><a href="/index_filmoteka.php">Seznam filmů</a></li>
-                    <li><a href="#">Administrace</a></li>
+                    <li><a href="/inc/Login.php" class="iframe">Login</a></li>
+                    <li><a href="/inc/AddUser.php" class="iframe">User</a></li>
+                    <li><a href="/inc/AddAddress.php" class="iframe">Adr</a></li>
+                    <li><a href="/inc/AddGenre.php" class="iframe">Gen</a></li>
+                    <li><a href="/inc/AddBorrower.php" class="iframe">Bor</a></li>
                 </ul>
             </div>
             <!-- end #menu -->
@@ -62,5 +66,5 @@ include_once "./inc/header.php";
                     </ul>
                 </div>
 <?php
-include_once "./inc/footer.php";
+include_once "./inc/Sfooter.php";
 ?>
