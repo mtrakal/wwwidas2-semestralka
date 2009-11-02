@@ -58,6 +58,7 @@ include_once "./inc/Sheader.php";
     require_once './classes/Movie.php';
     $movie = new Movie();
     echo $movie->count();
+    unset ($movie);
 ?>
                                 </li>
                                 <li><div>Registrovaných uživatelů</div>
@@ -65,6 +66,7 @@ include_once "./inc/Sheader.php";
     require_once './classes/User.php';
     $user = new User();
     echo $user->count();
+    unset ($user);
 ?>
                                 </li>
                                 <li><div>Nejpůjčovanější filmy</div>
