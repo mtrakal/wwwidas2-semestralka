@@ -13,6 +13,7 @@
 require_once './dibi/dibi.php';
 
 class Oci8 {
+    private $e;
 
     public function __construct() {
         try {
@@ -20,8 +21,17 @@ class Oci8 {
                 'driver'   => 'oracle',
                 'database' => 'sql101.upceucebny.cz:1521/oracle10',
                 'username' => 'st22312',
-                'password' => 'oracle'
+                'password' => 'oracletrtkal',
+                'charset' => 'utf-8'
             ));
+        } catch (DibiException $e) {
+            echo get_class($e), ': ', $e->getMessage(), "\n";
+        }
+    }
+
+    public function __destruct() {
+        try {
+            dibi::disconnect();
         } catch (DibiException $e) {
             echo get_class($e), ': ', $e->getMessage(), "\n";
         }

@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
- require_once './classes/Oci8.php';
+require_once './classes/Oci8.php';
 
 /**
  * Description of User
@@ -25,6 +25,7 @@ class User {
     public function Count() {
         $db = new Oci8();
         return $db->UsersCount();
+        unset ($db);
     }
 }
 ?>
