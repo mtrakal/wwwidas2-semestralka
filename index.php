@@ -1,5 +1,5 @@
 <?php
-include_once "./inc/Sheader.php";
+include_once dirname(__FILE__) . "/inc/Sheader.php";
 ?>
 <li class="current_page_item"><a href="/index.php">Hlavní stránka</a></li>
 <li><a href="/index_filmoteka.php">Seznam filmů</a></li>
@@ -55,7 +55,7 @@ include_once "./inc/Sheader.php";
                 <ul>
                     <li><div>Celkem filmů</div>
                         <?php
-                        require_once './classes/Movie.php';
+                        require_once dirname(__FILE__) . '/classes/Movie.php';
                         $movie = new Movie();
                         echo $movie->count();
                         unset ($movie);
@@ -63,7 +63,7 @@ include_once "./inc/Sheader.php";
                     </li>
                     <li><div>Registrovaných uživatelů</div>
                         <?php
-                        require_once './classes/User.php';
+                        require_once dirname(__FILE__) . '/classes/User.php';
                         $user = new User();
                         echo $user->count();
                         unset ($user);
