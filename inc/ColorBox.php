@@ -65,5 +65,12 @@ class ColorBox {
     public function UserDelete() {
         ;
     }
+
+    public static function Header() {
+        return '
+            <link href="/style/modal.css" rel="stylesheet" type="text/css" media="screen" />
+            <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
+        ';
+    }
 }
 ?>
