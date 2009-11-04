@@ -10,7 +10,7 @@
  * @author Administrator
  */
 
-require_once './dibi/dibi.php';
+include_once $_SERVER['DOCUMENT_ROOT'].'/dibi/dibi.php';
 
 class Oci8 {
     private $e;
@@ -53,6 +53,15 @@ class Oci8 {
             $result= dibi::query("select * from users_count");
             $single = $result->fetchSingle();
             return $single;
+        }
+    }
+    public function Role() {
+        $result = null;
+        $row = null;
+        if(dibi::isConnected()) {
+            $result= dibi::query("select * from trole");
+            $row = $result->fetchAll();
+            return $row;
         }
     }
 }

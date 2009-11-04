@@ -13,9 +13,16 @@
             <form id="add_user" action="'.$_SERVER['PHP_SELF'].'" method="post">
                 <p>
                     <label class="req">Přezdívka:</label><input type="text" name="user" /><br />
-                    <label class="req">Role:</label><select name="role" size="1">
-                        <option value="1">Administrátor</option>
-                        <option value="2">Půjčující</option>
+                    <label class="req">Role:</label>
+                    <select name="role" size="1">
+                        <?php
+                        require_once '../classes/Role.php';
+                        $role = new Role();
+                        foreach ($role->All() as $number_variable => $variable) {
+                            echo '<option value="'.$number_variable.'">'.$number_variable.'</option>';
+                        };
+                        unset ($role);
+                        ?>
                     </select><br />
                     <label class="req">Heslo:</label><input class="inp" type="password" name="pass" />
                 </p>
