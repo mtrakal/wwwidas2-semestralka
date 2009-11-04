@@ -16,7 +16,7 @@
                     <label class="req">Role:</label>
                     <select name="role" size="1">
                         <?php
-                        require_once '../classes/Role.php';
+                        require_once dirname(__FILE__) . '/../classes/Role.php';
                         $role = new Role();
                         foreach ($role->All() as $number_variable => $variable) {
                             echo '<option value="'.$number_variable.'">'.$number_variable.'</option>';

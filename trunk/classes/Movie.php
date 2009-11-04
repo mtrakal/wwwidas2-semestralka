@@ -1,5 +1,5 @@
 <?php
-require_once $_SERVER['DOCUMENT_ROOT'].'/classes/Oci8.php';
+require_once dirname(__FILE__) . '/Oci8.php';
 
 /**
  * Description of Movie
