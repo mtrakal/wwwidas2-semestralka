@@ -64,6 +64,7 @@ class ColorBox {
 
     public static function Header() {
         return '
+            <meta http-equiv="content-type" content="text/html; charset=utf-8" />
             <link href="/style/modal.css" rel="stylesheet" type="text/css" media="screen" />
             <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
         ';

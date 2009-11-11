@@ -1,10 +1,5 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-require_once './classes/Oci8.php';
+require_once dirname(__FILE__) . '/../classes/Oci8.php';
 
 /**
  * Description of User
@@ -12,8 +7,22 @@ require_once './classes/Oci8.php';
  * @author Administrator
  */
 class User {
-    public function Add() {
-        ;
+    private $password = null;
+    private $username = null;
+    private $role = null;
+
+    public function Add($username, $password, $role) {
+        try {
+            $this->username = $username;
+            $this->password = sha1($password);
+            $this->role = $role;
+
+            $db = new Oci8();
+            return $db->UsersAdd($this->username, $this->password, $this->role);
+            unset ($db);
+        } catch (DibiException $e) {
+            echo get_class($e), ': ', $e->getMessage(), "\n";
+        }
     }
     public function Delete() {
         ;

@@ -3,6 +3,7 @@
     <head>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link href="/style/modal.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
         <title>Přidání uživatele</title>
@@ -10,24 +11,41 @@
     <body>
         <div id="modal">
             <h1>Přidání uživatele</h1>
-            <form id="add_user" action="'.$_SERVER['PHP_SELF'].'" method="post">
+            <?php
+            if(isset($_POST['username'])) {
+                include_once dirname(__FILE__) . '/../classes/User.php';
+                $user = new User();
+                if($user->Add($_POST['username'],$_POST['password'], $_POST['role'])) {
+                    echo "<h2>Přidání proběhlo v pořádku</h2>";
+                } else {
+                    echo "<h2>Nastala chyba</h2>";
+                }
+            } else {
+                ?>
+            <form id="add_user" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <p>
-                    <label class="req">Přezdívka:</label><input type="text" name="user" /><br />
+                    <label class="req">Přezdívka:</label><input type="text" name="username" /><br />
                     <label class="req">Role:</label>
                     <select name="role" size="1">
-                        <?php
-                        require_once dirname(__FILE__) . '/../classes/Role.php';
-                        $role = new Role();
-                        foreach ($role->All() as $number_variable => $variable) {
-                            echo '<option value="'.$number_variable.'">'.$number_variable.'</option>';
-                        };
-                        unset ($role);
-                        ?>
+                            <?php
+                            require_once dirname(__FILE__) . '/../classes/Role.php';
+                            $role = new Role();
+                        /*
+                        while($pom[] = oci_fetch_assoc($role->All())) {
+                                echo $pom[0];
+                        }*/
+                            $pom = $role->All();
+                            foreach ($pom as $number_variable => $variable) {
+                                echo '<option value="'.$number_variable.'">'.$variable.'</option>';
+                            };
+                            unset ($role);
+                            ?>
                     </select><br />
-                    <label class="req">Heslo:</label><input class="inp" type="password" name="pass" />
+                    <label class="req">Heslo:</label><input class="inp" type="password" name="password" />
                 </p>
                 <div class="center"><input type="submit" value="Přidat" /></div>
             </form>
+            <?php } ?>
         </div>
     </body>
 </html>
