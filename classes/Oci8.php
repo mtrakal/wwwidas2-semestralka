@@ -49,12 +49,22 @@ class Oci8 {
             return $single;
         }
     }
+    public function UsersAdd($username, $password, $role) {
+        $result = null;
+        $single = null;
+        if(dibi::isConnected()) {
+            $result = dibi::query("insert into tuzivatel (nick, password, role_id) values ('".$username."','".$password."','".$role."')");
+            return true;
+        } else {
+            return false;
+        }
+    }
     public function Role() {
         $result = null;
-        $row = null;
+        $row = array();
         if(dibi::isConnected()) {
-            $result= dibi::query("select * from trole");
-            $row = $result->fetchAll();
+            $result= dibi::query("select role_id as ID, role as ROLE from trole");
+            $row = $result->fetchPairs();
             return $row;
         }
     }

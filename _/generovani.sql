@@ -2,7 +2,7 @@
 CREATE SEQUENCE sformattitulku_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE stitulky_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE sjazyk_id INCREMENT BY 1 START WITH 1 nomaxvalue;
-CREATE SEQUENCE suzivatel_id INCREMENT BY 1 START WITH 1 nomaxvalue;
+--CREATE SEQUENCE suzivatel_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE srole_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE sadresa_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE svypujcka_id INCREMENT BY 1 START WITH 1 nomaxvalue;
@@ -19,8 +19,8 @@ create or replace trigger ttitulky_id before insert on ttitulky for each row beg
 /
 create or replace trigger tjazyk_id before insert on tjazyk for each row begin select sjazyk_id.nextval into :new.jazyk_id from dual; end;
 /
-create or replace trigger tuzivatel_id before insert on tuzivatel for each row begin select suzivatel_id.nextval into :new.uzivatel_id from dual; end;
-/
+--create or replace trigger tuzivatel_id before insert on tuzivatel for each row begin select suzivatel_id.nextval into :new.uzivatel_id from dual; end;
+--/
 create or replace trigger trole_id before insert on trole for each row begin select srole_id.nextval into :new.role_id from dual; end;
 /
 create or replace trigger tadresa_id before insert on tadresa for each row begin select sadresa_id.nextval into :new.adresa_id from dual; end;
@@ -39,7 +39,7 @@ create or replace trigger tformatfilmu_id before insert on tformat_filmu for eac
 /* POHLEDY */
 CREATE OR REPLACE FORCE VIEW movie_count ("POCET_FILMU") AS SELECT count(film_id) as pocet_filmu FROM ttitul;
 /
-CREATE OR REPLACE FORCE VIEW users_count ("POCET_UZIVATELU") AS SELECT count(uzivatel_id) as pocet_uzivatelu FROM tuzivatel;
+CREATE OR REPLACE FORCE VIEW users_count ("POCET_UZIVATELU") AS SELECT count(nick) as pocet_uzivatelu FROM tuzivatel;
 /
 
 
@@ -56,8 +56,8 @@ INSERT INTO "ST22312"."TZANR" (ZANR) VALUES ('Dokumentární');
 
 /* ROLE */
 INSERT INTO "ST22312"."TROLE" (ROLE) VALUES ('Visitor');
-INSERT INTO "ST22312"."TROLE" (ROLE) VALUES ('Administrator');
 INSERT INTO "ST22312"."TROLE" (ROLE) VALUES ('Borrower');
+INSERT INTO "ST22312"."TROLE" (ROLE) VALUES ('Administrator');
 
 /* JAZYK */
 INSERT INTO "ST22312"."TJAZYK" (JAZYK) VALUES ('CZ');
