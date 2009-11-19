@@ -17,9 +17,14 @@ class Movie {
         ;
     }
 
-    public function count() {
+    public function Count() {
         $db = new Oci8();
         return $db->MovieCount();
+        unset ($db);
+    }
+    public function Get($id) {
+        $db = new Oci8();
+        return $db->MovieGet($id);
         unset ($db);
     }
 }

@@ -57,7 +57,7 @@ include_once dirname(__FILE__) . "/inc/Sheader.php";
                         <?php
                         require_once dirname(__FILE__) . '/classes/Movie.php';
                         $movie = new Movie();
-                        echo $movie->count();
+                        echo $movie->Count();
                         unset ($movie);
                         ?>
                     </li>
@@ -65,7 +65,7 @@ include_once dirname(__FILE__) . "/inc/Sheader.php";
                         <?php
                         require_once dirname(__FILE__) . '/classes/User.php';
                         $user = new User();
-                        echo $user->count();
+                        echo $user->Count();
                         unset ($user);
                         ?>
                     </li>

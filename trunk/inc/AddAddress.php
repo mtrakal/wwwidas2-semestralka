@@ -34,7 +34,7 @@ echo $page;
     <body>
         <div id="modal">
             <h1>Přidání adresy</h1>
-            <form id="add_address" action="'.$_SERVER['PHP_SELF'].'" method="post">
+            <form id="add_address" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <p>
                     <label class="req">Ulice:</label><input type="text" name="street" /><br />
                     <label class="req">ČP:</label><input type="text" name="number" /><br />
