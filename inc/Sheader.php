@@ -43,7 +43,7 @@ else {
                 });
                 $(".colorbox").colorbox();
                 $(".youtube").colorbox({iframe:true, width:650, height:550});
-                $(".iframe").colorbox({width: 450, height:280, iframe:true});
+                $(".iframe").colorbox({width:450, height:280, iframe:true});
                 $(".inline").colorbox({width:"50%", inline:true, href:"#inline_example1"});
 
                 //Example of preserving a JavaScript event for inline calls.

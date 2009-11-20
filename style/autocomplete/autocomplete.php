@@ -24,7 +24,7 @@ if(isset($_GET['part']) and $_GET['part'] != '') {
     foreach ($pom as $variable) {
     // if it starts with 'part' add to results
     //if( strpos($variable, 'amel') === 0 ) {
-        $results[] = $variable['ORIGINAL']."<div class=\"font-small\"><p><a href=\"/titul/".$variable['IDFILMU'].".html\">CZ: ".$variable['CZ']."</a><br />EN:".$variable['EN']."<br />".$variable['POPIS']."&hellip;</p></div>";
+        $results[] = "<a href=\"/titul/".$variable['IDFILMU'].".html\">".$variable['ORIGINAL']."</a><div class=\"font-small\"><p>CZ: ".$variable['CZ']."<br />EN:".$variable['EN']."<br />".$variable['POPIS']."&hellip;</p></div>";
     //}
     };
     unset ($pom);

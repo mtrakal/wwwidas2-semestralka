@@ -1,8 +1,5 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+require_once dirname(__FILE__) . '/../classes/Oci8.php';
 
 /**
  * Description of Genre
@@ -10,8 +7,20 @@
  * @author Administrator
  */
 class Genre {
-    public function Add() {
-        ;
+    private $genre = null;
+    
+    public function Add($genre) {
+        try {
+            $this->genre = $genre;
+
+            $db = new Oci8();
+            $db->GenreAdd($this->genre);
+            unset ($db);
+            return true;
+        } catch (DibiException $e) {
+            echo get_class($e), ': ', $e->getMessage(), "\n";
+            return false;
+        }
     }
     public function Edit() {
         ;

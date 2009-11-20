@@ -5,18 +5,18 @@ include_once "./inc/Sheader.php";
 ?>
 <li><a href="/index.php">Hlavní stránka</a></li>
 <li class="current_page_item"><a href="/index_filmoteka.php">Seznam filmů</a></li>
-<li><a href="/inc/Login.php?TB_iframe=true&amp;height=200&amp;width=350" class="thickbox">Administrace</a></li>
+<li><a href="/index_administrace.php">Administrace</a></li>
 </ul>
 </div>
 <!-- end #menu -->
 <div id="page">
+    <?php if (isset($_GET['movie'])) {
+        $result = array();
+        $titul = new Movie();
+        $result = $titul->Get($_GET['movie']);
+        unset($titul);
+        ?>
     <div id="content">
-        <?php if (isset($_GET['movie'])) {
-            $result = array();
-            $titul = new Movie();
-            $result = $titul->Get($_GET['movie']);
-            unset($titul);
-            ?>
             <!--<div id="banner"><img src="/style/img/img07.jpg" alt="" /></div>-->
         <div class="post">
             <h2 class="title"><a href="#"><?php echo $result['0']['CZ']; ?></a></h2>
@@ -58,22 +58,38 @@ include_once "./inc/Sheader.php";
 				</li>
 				-->
         </ul>
-        <?php } else { ?>
-        <div class="post">
-            <h2 class="title"><a href="#">Vyhledávání v databázi</a></h2>
-            <script type="text/javascript">
-                $(function(){
-                    setAutoComplete("searchField", "results", "/style/autocomplete/autocomplete.php?part=");
-                });
-            </script>
-            <p id="search">
-                <label for="searchField">Hledat: </label>
-                <input id="searchField" name="searchField" type="text" />
-            </p>
-        </div>
-
-        <?php } ?>
     </div>
+    <?php } else { ?>
+    <div id="content">
+        <div class="post">
+            <h2 class="title"><a href="#">Výsledky vyhledávání</a></h2>
+            <div class="entry">
+
+            </div>
+        </div>
+        <div class="cleaner both">&nbsp;</div>
+    </div>
+    <!-- end #content -->
+    <div id="sidebar">
+        <ul>
+            <li>
+                <h2>Vyhledávání</h2>
+                <ul>
+                    <script type="text/javascript">
+                        $(function(){
+                            setAutoComplete("searchField", "results", "/style/autocomplete/autocomplete.php?part=");
+                        });
+                    </script>
+                    <li id="search">
+                        <label for="searchField">Hledat: </label>
+                        <input id="searchField" name="searchField" type="text" />
+                        <input type="submit" value="Odeslat" />
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <?php } ?>
     <?php
     include_once "./inc/Sfooter.php";
 ?>

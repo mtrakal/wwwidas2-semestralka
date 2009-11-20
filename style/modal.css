@@ -23,7 +23,6 @@ Released for free under a Creative Commons Attribution 2.5 License
     font-size: 1em;
     font-weight: normal;
     font-style: normal;
-    text-decoration: none;
     font-family: Georgia, "Times New Roman", Times, serif;
 }
 html, body {
@@ -94,4 +93,13 @@ select {
 }
 #modal form#login {
 	width: 230px;
+}
+#modal a {
+	color: #32639a;
+}
+#modal a:hover {
+	color: #b90000;
+}
+#modal p.link {
+	margin-top: 40px;
 }
