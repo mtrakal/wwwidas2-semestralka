@@ -7,8 +7,13 @@
         <link href="/style/modal.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
         <title>Přidání uživatele</title>
+        <script type="text/javascript">
+            function setfocus() {
+                document.form.username.focus();
+            }
+        </script>
     </head>
-    <body>
+    <body onLoad="setfocus()">
         <div id="modal">
             <h1>Přidání uživatele</h1>
             <?php
@@ -16,13 +21,13 @@
                 include_once dirname(__FILE__) . '/../classes/User.php';
                 $user = new User();
                 if($user->Add($_POST['username'],$_POST['password'], $_POST['role'])) {
-                    echo "<h2>Přidání proběhlo v pořádku</h2>";
+                    echo "<h2>Přidání proběhlo v pořádku</h2><p class=\"link\"><a href=\"".$_SERVER['PHP_SELF']."\">Přidat další</a></p>";
                 } else {
                     echo "<h2>Nastala chyba</h2>";
                 }
             } else {
                 ?>
-            <form id="add_user" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <form id="add_user" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
                 <p>
                     <label class="req">Přezdívka:</label><input type="text" name="username" /><br />
                     <label class="req">Role:</label>

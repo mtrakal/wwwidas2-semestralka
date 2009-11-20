@@ -27,14 +27,31 @@ echo $page;
     <head>
         <meta name="keywords" content="" />
         <meta name="description" content="" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link href="/style/modal.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
         <title>Přidání uživatele</title>
+        <script type="text/javascript">
+            function setfocus() {
+                document.form.street.focus();
+            }
+        </script>
     </head>
-    <body>
+    <body onLoad="setfocus()">
         <div id="modal">
             <h1>Přidání adresy</h1>
-            <form id="add_address" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+            <?php
+            if(isset($_POST['street'])) {
+                include_once dirname(__FILE__) . '/../classes/BorrowerAddress.php';
+                $borroweraddress = new BorrowerAddress();
+                if($borroweraddress->Add($_POST['street'],$_POST['number'], $_POST['psc'], $_POST['city'])) {
+                    echo "<h2>Přidání proběhlo v pořádku</h2><p class=\"link\"><a href=\"".$_SERVER['PHP_SELF']."\">Přidat další adresu</a>, nebo <a href=\"./AddBorrower.php\">přidat půjčujícího</a></p>";
+                } else {
+                    echo "<h2>Nastala chyba</h2>";
+                }
+            } else {
+                ?>
+            <form id="add_address" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
                 <p>
                     <label class="req">Ulice:</label><input type="text" name="street" /><br />
                     <label class="req">ČP:</label><input type="text" name="number" /><br />
@@ -43,6 +60,7 @@ echo $page;
                 </p>
                 <div class="center"><input type="submit" value="Přidat" /></div>
             </form>
+            <?php } ?>
         </div>
     </body>
 </html>

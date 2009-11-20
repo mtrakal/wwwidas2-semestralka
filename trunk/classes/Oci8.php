@@ -7,7 +7,7 @@ include_once dirname(__FILE__) . '/../dibi/dibi.php';
  * @author Administrator
  */
 class Oci8 {
-    private $e;
+    private $e = null;
 
     public function __construct() {
         try {
@@ -51,7 +51,6 @@ class Oci8 {
     }
     public function UsersAdd($username, $password, $role) {
         $result = null;
-        $single = null;
         if(dibi::isConnected()) {
             $result = dibi::query("insert into tuzivatel (nick, password, role_id) values ('".$username."','".$password."','".$role."')");
             return true;
@@ -83,6 +82,51 @@ class Oci8 {
         $row = array();
         if(dibi::isConnected()) {
             $result= dibi::query("select film_id as IDFILMU, cz as CZ, en as EN, original as ORIGINAL, csfd as CSFD, imdb as IMDB, rok_vydani as ROK, delka as DELKA, popis as POPIS from ttitul where film_id=".$id);
+            $row = $result->fetchAll();
+            return $row;
+        }
+    }
+    public function BorrowerAddressAdd($street,$number, $psc, $city) {
+        $result = null;
+        if(dibi::isConnected()) {
+            $result = dibi::query("insert into tadresa (ulice, cislo, psc, mesto) values ('".$street."','".$number."','".$psc."','".$city."')");
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function GenreAdd($genre) {
+        $result = null;
+        if(dibi::isConnected()) {
+            $result = dibi::query("insert into tzanr (zanr) values ('".$genre."')");
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function BorrowerAddressGetAllComplete() {
+        $result = null;
+        $row = array();
+        if(dibi::isConnected()) {
+            $result= dibi::query("select ADRESA_ID as ID, MESTO as MESTO, PSC as PSC, ULICE as ULICE, CISLO as CISLO from tadresa order by mesto, ulice, cislo asc");
+            $row = $result->fetchAll();
+            return $row;
+        }
+    }
+    public function BorrowerAdd($nick, $firstname,$lastname, $email, $address, $phone=null) {
+        $result = null;
+        if(dibi::isConnected()) {
+            $result = dibi::query("insert into TPUJCUJICI (NICK, JMENO, PRIJMENI, EMAIL, ADRESA_ID, TELEFON) values ('".$nick."','".$firstname."','".$lastname."','".$email."','".$address."', '".$phone."')");
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function UsersGetAllNick() {
+        $result = null;
+        $row = array();
+        if(dibi::isConnected()) {
+            $result= dibi::query("select NICK as NICK from TUZIVATEL order by NICK asc");
             $row = $result->fetchAll();
             return $row;
         }

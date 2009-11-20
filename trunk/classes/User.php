@@ -39,5 +39,10 @@ class User {
         return $db->UsersCount();
         unset ($db);
     }
+    public function GetAllNick() {
+        $db = new Oci8();
+        return $db->UsersGetAllNick();
+        unset ($db);
+    }
 }
 ?>

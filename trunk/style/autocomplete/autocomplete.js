@@ -134,11 +134,11 @@ function repositionResultsDiv()
 	// get the field position
 	var sf_pos    = acSearchField.offset();
 	var sf_top    = sf_pos.top;
-	var sf_left   = sf_pos.left;
+	var sf_left   = sf_pos.left-200;
 
 	// get the field size
 	var sf_height = acSearchField.height();
-	var sf_width  = acSearchField.width()+150; //trtkal edit
+	var sf_width  = acSearchField.width()+300; //trtkal edit
 
 	// apply the css styles - optimized for Firefox
 	acResultsDiv.css("position","absolute");
