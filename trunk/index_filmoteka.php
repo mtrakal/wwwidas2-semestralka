@@ -1,4 +1,14 @@
 <?php
+if(isset($_GET['export'])) {
+    if($_GET['export']=='xml') {
+        include_once dirname(__FILE__) . '/classes/XMLParse.php';
+        $xml = new XMLParse();
+        $xml->MovieGet();
+        die();
+    }
+}
+?>
+<?php
 require_once dirname(__FILE__) . '/classes/Movie.php';
 
 include_once "./inc/Sheader.php";
@@ -10,7 +20,8 @@ include_once "./inc/Sheader.php";
 </div>
 <!-- end #menu -->
 <div id="page">
-    <?php if (isset($_GET['movie'])) {
+    <?php
+    if (isset($_GET['movie'])) {
         $result = array();
         $titul = new Movie();
         $result = $titul->Get($_GET['movie']);
@@ -71,19 +82,27 @@ include_once "./inc/Sheader.php";
     </div>
     <!-- end #content -->
     <div id="sidebar">
+        <script type="text/javascript">
+            $(function(){
+                setAutoComplete("searchField", "results", "/style/autocomplete/autocomplete.php?part=");
+            });
+        </script>
         <ul>
             <li>
                 <h2>Vyhledávání</h2>
                 <ul>
-                    <script type="text/javascript">
-                        $(function(){
-                            setAutoComplete("searchField", "results", "/style/autocomplete/autocomplete.php?part=");
-                        });
-                    </script>
                     <li id="search">
                         <label for="searchField">Hledat: </label>
                         <input id="searchField" name="searchField" type="text" />
                         <input type="submit" value="Odeslat" />
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h2>Export</h2>
+                <ul>
+                    <li>
+                        <a href="?export=xml">Do xml souboru</a>
                     </li>
                 </ul>
             </li>
