@@ -131,5 +131,14 @@ class Oci8 {
             return $row;
         }
     }
+    public function MovieParseXML() {
+        $result = null;
+        $row = array();
+        if(dibi::isConnected()) {
+            $result= dibi::query("select xmlelement(`titul`, xmlforest(film_id as `id-filmu`,cz as `nazev-cesky`,en as `nazev-anglicky`,original as `nazev-originalni`,delka as `delka`,rok_vydani as `datum-vydani`,csfd as `odkaz-csfd`,imdb as `odkaz-imdb`,popis as `popis-filmu`)) as xml from ttitul order by cz");
+            $row = $result->fetchAll();
+            return $row;
+        }
+    }
 }
 ?>
