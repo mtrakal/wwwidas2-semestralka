@@ -1,10 +1,10 @@
 <?php
 include_once dirname(__FILE__) . '/../dibi/dibi.php';
-
+include_once dirname(__FILE__) . '/../../heslo.php';
 /**
  * Description of Oci8
  *
- * @author Administrator
+* @author Trtkal
  */
 class Oci8 {
     private $e = null;
@@ -15,14 +15,13 @@ class Oci8 {
                 'driver'   => 'oracle',
                 'database' => 'sql101.upceucebny.cz:1521/oracle10',
                 'username' => 'st22312',
-                'password' => 'oracletrtkal',
+                'password' => HESLO,
                 'charset' => 'UTF8'
             ));
         } catch (DibiException $e) {
             echo get_class($e), ': ', $e->getMessage(), "\n";
         }
     }
-
     public function __destruct() {
         try {
             dibi::disconnect();
@@ -30,7 +29,10 @@ class Oci8 {
             echo get_class($e), ': ', $e->getMessage(), "\n";
         }
     }
-
+    /**
+     * Vypsání počtu titulů v DB
+     * @return <integer> počet titulů v databázi
+     */
     public function MovieCount() {
         $result = null;
         $single = null;
@@ -40,6 +42,10 @@ class Oci8 {
             return $single;
         }
     }
+    /**
+     * Vypsání počtu uživatelů v DB
+     * @return <integer> počet uživatelů v databázi
+     */
     public function UsersCount() {
         $result = null;
         $single = null;
@@ -49,6 +55,13 @@ class Oci8 {
             return $single;
         }
     }
+    /**
+     * Přidání uživatele
+     * @param <string> $username
+     * @param <string> $password
+     * @param <integer> $role
+     * @return <boolean> provedeno úspěšně?
+     */
     public function UsersAdd($username, $password, $role) {
         $result = null;
         if(dibi::isConnected()) {
@@ -58,6 +71,10 @@ class Oci8 {
             return false;
         }
     }
+    /**
+     * Vybrání všech uživatelských rolí z DB
+     * @return <Pairs[]> uživatelské role
+     */
     public function Role() {
         $result = null;
         $row = array();
@@ -67,7 +84,11 @@ class Oci8 {
             return $row;
         }
     }
-
+    /**
+     * Doplňování názvu filmů
+     * @param <string> $var
+     * @return <Array[][]> vícerozměrné pole
+     */
     public function Autocomplete($var) {
         $result = null;
         $row = array();
@@ -77,6 +98,11 @@ class Oci8 {
             return $row;
         }
     }
+    /**
+     * Informace o filmu
+     * @param <integer> $id
+     * @return <Array[][]> informace o vybraném filmu
+     */
     public function MovieGet($id) {
         $result = null;
         $row = array();
@@ -86,6 +112,14 @@ class Oci8 {
             return $row;
         }
     }
+    /**
+     * Přidání adresy vypůjčujícího
+     * @param <string> $street
+     * @param <integer> $number
+     * @param <integer> $psc
+     * @param <string> $city
+     * @return <boolean> přidáno úspěšně?
+     */
     public function BorrowerAddressAdd($street,$number, $psc, $city) {
         $result = null;
         if(dibi::isConnected()) {
@@ -95,6 +129,11 @@ class Oci8 {
             return false;
         }
     }
+    /**
+     * Přidání žánru filmu
+     * @param <string> $genre
+     * @return <boolean> přidáno úspěšně?
+     */
     public function GenreAdd($genre) {
         $result = null;
         if(dibi::isConnected()) {
@@ -104,6 +143,10 @@ class Oci8 {
             return false;
         }
     }
+    /**
+     * Vrací seznam všech adres v DB
+     * @return <Array[][]> seznam adres
+     */
     public function BorrowerAddressGetAllComplete() {
         $result = null;
         $row = array();
@@ -113,6 +156,16 @@ class Oci8 {
             return $row;
         }
     }
+    /**
+     * Přidání vypujčujícího
+     * @param <string> $nick
+     * @param <string> $firstname
+     * @param <string> $lastname
+     * @param <string> $email
+     * @param <integer> $address
+     * @param <number> $phone
+     * @return <boolean> přidáno úspěšně?
+     */
     public function BorrowerAdd($nick, $firstname,$lastname, $email, $address, $phone=null) {
         $result = null;
         if(dibi::isConnected()) {
@@ -122,6 +175,10 @@ class Oci8 {
             return false;
         }
     }
+    /**
+     * Vybrání všech přezdívek z DB
+     * @return <Array[][]> přezdívky
+     */
     public function UsersGetAllNick() {
         $result = null;
         $row = array();
@@ -131,6 +188,10 @@ class Oci8 {
             return $row;
         }
     }
+    /**
+     * Vrací informace o titulech - parsované jako XML
+     * @return <Array['XML']> parsované XML
+     */
     public function MovieParseXML() {
         $result = null;
         $row = array();

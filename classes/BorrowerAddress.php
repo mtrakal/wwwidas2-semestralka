@@ -4,7 +4,7 @@ require_once dirname(__FILE__) . '/../classes/Oci8.php';
 /**
  * Description of BorrowerAddress
  *
- * @author Administrator
+ * @author Trtkal
  */
 class BorrowerAddress {
     private $street = null;
