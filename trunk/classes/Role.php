@@ -4,7 +4,7 @@ require_once dirname(__FILE__) . '/Oci8.php';
 /**
  * Description of Role
  *
- * @author Administrator
+ * @author Trtkal
  */
 class Role {
     public function Add() {

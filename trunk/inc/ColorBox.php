@@ -3,7 +3,7 @@
 /**
  * Description of ColorBox
  *
- * @author Administrator
+ * @author Trtkal
  */
 class ColorBox {
     protected $nick = null;

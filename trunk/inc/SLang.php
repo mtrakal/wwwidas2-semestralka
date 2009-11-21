@@ -1,13 +1,9 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Description of Lang
  *
- * @author Administrator
+ * @author Trtkal
  */
 class Lang {
 // language set up by http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 but use small

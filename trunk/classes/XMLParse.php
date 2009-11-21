@@ -4,7 +4,7 @@ require_once dirname(__FILE__) . '/Oci8.php';
 /**
  * Description of XMLParse
  *
- * @author Administrator
+ * @author Trtkal
  */
 class XMLParse {
     public function MovieGet() {

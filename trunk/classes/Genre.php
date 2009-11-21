@@ -4,11 +4,11 @@ require_once dirname(__FILE__) . '/../classes/Oci8.php';
 /**
  * Description of Genre
  *
- * @author Administrator
+ * @author Trtkal
  */
 class Genre {
     private $genre = null;
-    
+
     public function Add($genre) {
         try {
             $this->genre = $genre;

@@ -2,7 +2,7 @@
 /**
  * Description of Init
  *
- * @author Administrator
+ * @author Trtkal
  */
 class Init {
     protected $dirname;

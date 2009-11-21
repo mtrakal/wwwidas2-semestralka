@@ -1,13 +1,9 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  * Description of SubtitlesFormat
  *
- * @author Administrator
+ * @author Trtkal
  */
 class SubtitlesFormat {
     public function Add() {

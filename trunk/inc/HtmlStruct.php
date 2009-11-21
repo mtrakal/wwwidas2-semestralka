@@ -2,7 +2,7 @@
 /**
  * Description of HtmlStruct
  *
- * @author Administrator
+ * @author Trtkal
  */
 class HtmlStruct {
     public static function Dtd() {

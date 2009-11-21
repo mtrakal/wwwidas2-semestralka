@@ -4,7 +4,7 @@ require_once dirname(__FILE__) . '/Oci8.php';
 /**
  * Description of Movie
  *
- * @author Administrator
+ * @author Trtkal
  */
 class Movie {
     public function Add() {
