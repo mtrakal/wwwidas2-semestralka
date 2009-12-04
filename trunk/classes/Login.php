@@ -26,7 +26,7 @@ class Login {
      * @param <string> $password
      * @return <boolean> přihlášen úspěšně?
      */
-    public function Authorize($user, $password) {
+    public function Authorize($username, $password) {
 
         $this->username = $username;
         $this->password = sha1($password) . md5(strlen($password));
@@ -36,17 +36,15 @@ class Login {
             $result = $db->UserAuth($this->username, $this->password);
             unset($db);
 
-            if($result != null) {
-                if(($row['username'] == $username) AND ($row['password'] == $password)) {
-                    $_SESSION['login']=$row['true'];
-                    $_SESSION['username']=$row['username'];
-                    $_SESSION['role'] = $result;
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
+            if(($result != null) && ($this->username = $result[0]['USERNAME'] && ($this->password = $result[0]['PASSWORD']))) {
+                    $_SESSION['login']=true;
+                    $_SESSION['username']=$result[0]['USERNAME'];
+                    $_SESSION['role'] = $result[0]['ROLE'];
+                    return true;
+						} else {
+                    return false;
             }
+            
         } catch (DibiException $e) {
             echo get_class($e), ': ', $e->getMessage(), "\n";
             return false;
@@ -58,10 +56,14 @@ class Login {
       */
     public function IsAuthorized() {
         if(isset($_SESSION['login'])) {
-            return 1;
+					if($_SESSION['login']) {
+            return true;
+          } else {
+						return false;
+					}
         }
         else {
-            return 0;
+            return false;
         }
     }
     /**

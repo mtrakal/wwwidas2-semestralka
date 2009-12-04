@@ -1,9 +1,17 @@
 <?php
-include_once dirname(__FILE__) . "/inc/Sheader.php";
+require_once dirname(__FILE__) . '/classes/Login.php';
+require_once dirname(__FILE__) . "/inc/Sheader.php";
 ?>
 <li class="current_page_item"><a href="/index.php">Hlavní stránka</a></li>
 <li><a href="/index_filmoteka.php">Seznam filmů</a></li>
-<li><a href="/index_administrace.php">Administrace</a></li>
+<?php
+	$login = new Login();
+	if($login->IsAuthorized()) {
+		echo '<li><a href="/index_administrace.php">Administrace</a></li>';
+	} else {
+		echo '<li><a href="/inc/Login.php" class="iframe">Administrace</a></li>';
+	}
+	?>
 </ul>
 </div>
 <!-- end #menu -->
@@ -73,6 +81,6 @@ include_once dirname(__FILE__) . "/inc/Sheader.php";
             </li>
         </ul>
     </div>
-    <?php
-    include_once "./inc/Sfooter.php";
+<?php
+	require_once "./inc/Sfooter.php";
 ?>
