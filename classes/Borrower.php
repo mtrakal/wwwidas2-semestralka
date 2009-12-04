@@ -14,6 +14,16 @@ class Borrower {
     private $address = null;
     private $phone = null;
 
+    /**
+     * Přidání půjčujícího
+     * @param <number> $nick
+     * @param <string> $firstname
+     * @param <string> $lastname
+     * @param <string> $email
+     * @param <string> $address
+     * @param <number> $phone
+     * @return <boolean> Byl půjčující přidán?
+     */
     public function Add($nick, $firstname, $lastname, $email, $address, $phone=null) {
         try {
             $this->nick = $nick;

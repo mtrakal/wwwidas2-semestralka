@@ -55,6 +55,13 @@ include_once "./inc/Sheader.php";
                             <li><a href="#" class="iframe" title="zatím nefunguje">Odstranit</a></li>
                         </ul>
                     </li>
+                    <li><div>Titul filmu</div>
+                        <ul>
+                            <li><a href="/inc/AddMovie.php" class="iframe movie">Přidat</a></li>
+                            <li><a href="#" class="iframe" title="zatím nefunguje">Upravit</a></li>
+                            <li><a href="#" class="iframe" title="zatím nefunguje">Odstranit</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
             <!--
