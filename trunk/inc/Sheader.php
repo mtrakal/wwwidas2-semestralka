@@ -16,20 +16,67 @@ else {
         <title>IWWW a IDAS2 semestrálka &raquo; Filmotéka</title>
         <link href="/style/screen.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
-        <!--
-                                        <script type="text/javascript" src="/style/tb/jquery-latest.pack.js"></script>
-                                        <script type="text/javascript" src="/style/tb/thickbox.js"></script>
-				<link rel="stylesheet" href="/style/tb/thickbox.css" type="text/css" media="screen" />
-        -->
+        <!-- jQUERY -->
+        <script type="text/javascript" src="/style/texyla/jquery/jquery.js"></script>
+        <script type="text/javascript" src="/style/texyla/jquery/jquery-ui.js"></script>
+        <!-- jQUERY_konec -->
 
+        <!-- AUTOCOMPLETE -->
         <link rel="stylesheet" href="/style/autocomplete/autocomplete.css" type="text/css" media="screen" />
-        <script src="/style/autocomplete/jquery.js" type="text/javascript"></script>
+        <!--<script src="/style/autocomplete/jquery.js" type="text/javascript"></script>-->
         <script src="/style/autocomplete/dimensions.js" type="text/javascript"></script>
         <script src="/style/autocomplete/autocomplete.js" type="text/javascript"></script>
+        <!-- AUTOCOMPLETE_konec -->
+        <!-- TEXYLA -->
+        <script type="text/javascript" src="/style/texyla/texyla/texyla.js"></script>
+        <link rel="stylesheet" type="text/css" href="/style/texyla/texyla/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/style/texyla/themes/default/theme.css" />
 
+        <script type="text/javascript">
+            //<![CDATA[
 
+            $(function () {
+                $.texyla("setDefaults", {
+                    // language: "en"
+                });
+
+                $("#text2").texyla({
+                    toolbar: [
+                        'h1', 'h2', 'h3', 'h4',
+                        null,
+                        'bold', 'italic',
+                        null,
+                        'center', ['left', 'right', 'justify'],
+                        null,
+                        'ul', 'ol',
+                        null,
+                        'link', 'img', 'table', 'emoticon',
+                        null,
+                        "files",
+                        null,
+                        'div', ['html', 'blockquote', 'text', 'comment'],
+                        null,
+                        'code',	['codeHtml', 'codeCss', 'codeJs', 'codePhp', 'codeSql'], 'codeInline',
+                        null,
+                        {type: "label", text: "Ostatní"}, ['sup', 'sub', 'del', 'acronym', 'hr', 'notexy', 'web']
+                    ],
+                    bottomLeftToolbar: ['edit', 'preview', 'htmlPreview'],
+                    tabs: true,
+                    texyCfg: "admin",
+                    width: 800
+                });
+
+                $.texyla({
+                    texyCfg: "forum",
+                    buttonType: "button"
+
+                });
+            });
+            //]]></script>
+        <!-- TEXYLA_konec -->
+        <!-- COLORBOX -->
         <link type="text/css" media="screen" rel="stylesheet" href="/style/colorbox.css" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <!-- texy s tím NEJEDE <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> -->
         <script type="text/javascript" src="/style/colorbox/jquery.colorbox.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
@@ -44,6 +91,7 @@ else {
                 $(".colorbox").colorbox();
                 $(".youtube").colorbox({iframe:true, width:650, height:550});
                 $(".iframe").colorbox({width:450, height:280, iframe:true});
+                $(".iframe.movie").colorbox({width:700, height:600, iframe:true});
                 $(".inline").colorbox({width:"50%", inline:true, href:"#inline_example1"});
 
                 //Example of preserving a JavaScript event for inline calls.
@@ -53,6 +101,7 @@ else {
                 });
             });
         </script>
+        <!-- COLORBOX_konec -->
     </head>
     <body>
         <div id="wrapper">

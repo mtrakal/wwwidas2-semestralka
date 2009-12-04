@@ -75,7 +75,27 @@ include_once "./inc/Sheader.php";
         <div class="post">
             <h2 class="title"><a href="#">Výsledky vyhledávání</a></h2>
             <div class="entry">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
+                    <p>
+                        <textarea name="text2" rows="20" cols="90" id="text2">
+Vítejte!
+--------
 
+Můžete používat syntax Texy!, pokud Vám vyhovuje:
+- třeba **tučné** písmo nebo *kurzíva*
+- a takto se dělá "odkaz":http://texy.info
+- více najdete na stránce syntax:[syntax]
+
+
+Ale také můžete zůstat u HTML:
+- takto &lt;b&gt;HTML&lt;/b&gt;
+- nebo i &lt;b class=xx&gt;úplně &lt;i&gt;hloupě&lt;/b&gt;, Texy! to pořeší
+
+
+[syntax]: /cs/syntax
+                        </textarea>
+                    </p>
+                </form>
             </div>
         </div>
         <div class="cleaner both">&nbsp;</div>

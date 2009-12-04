@@ -46,7 +46,7 @@
                             unset ($role);
                             ?>
                     </select><br />
-                    <label class="req">Heslo:</label><input class="inp" type="password" name="password" />
+                    <label class="req">Heslo:</label><input type="password" name="password" />
                 </p>
                 <div class="center"><input type="submit" value="Přidat" /></div>
             </form>

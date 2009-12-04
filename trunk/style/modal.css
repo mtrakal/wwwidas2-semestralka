@@ -103,3 +103,7 @@ select {
 #modal p.link {
 	margin-top: 40px;
 }
+
+#modal #add_movie {
+    width:300px;
+}

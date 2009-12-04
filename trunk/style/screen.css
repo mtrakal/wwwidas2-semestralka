@@ -534,3 +534,13 @@ strong {
 	margin: 0px 0px 0px 5px;
 	width: 120px;
 }
+#content ul {
+	padding-left: 10px;
+	list-style: disc;
+	list-style-position: inside;
+}
+#content ol {
+	padding-left: 10px;
+	list-style: decimal;
+	list-style-position: inside;
+}

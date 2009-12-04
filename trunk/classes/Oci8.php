@@ -4,7 +4,7 @@ include_once dirname(__FILE__) . '/../../heslo.php';
 /**
  * Description of Oci8
  *
-* @author Trtkal
+ * @author Trtkal
  */
 class Oci8 {
     private $e = null;
@@ -199,6 +199,19 @@ class Oci8 {
             $result= dibi::query("select xmlelement(`titul`, xmlforest(film_id as `id-filmu`,cz as `nazev-cesky`,en as `nazev-anglicky`,original as `nazev-originalni`,delka as `delka`,rok_vydani as `datum-vydani`,csfd as `odkaz-csfd`,imdb as `odkaz-imdb`,popis as `popis-filmu`)) as xml from ttitul order by cz");
             $row = $result->fetchAll();
             return $row;
+        }
+    }
+    /**
+     * Ověření uživatele skrz databázi
+     * @param <string> $username
+     * @param <string> $password
+     * @return <string> Uživatelská role
+     */
+    public function UserAuth($username, $password) {
+        $result = null;
+        if(dibi::isConnected()) {
+            $result= dibi::query("select role from TUZIVATEL left join TROLE on TROLE.ROLE_ID=TUZIVATEL.ROLE_ID where NICK='".$username."' and PASSWORD='".$password."'");
+            return $result->fetchSingle();
         }
     }
 }

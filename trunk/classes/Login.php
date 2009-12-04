@@ -1,4 +1,7 @@
 <?php
+session_start();
+
+require_once dirname(__FILE__) . '/../classes/Oci8.php';
 
 /**
  * Description of Login
@@ -8,6 +11,7 @@
 class Login {
     private $login = false;
     private $username = null;
+    private $password = null;
     private $role = 'guest';
     private $jmeno = null;
     private $prijmeni = null;
@@ -16,6 +20,61 @@ class Login {
     private $uzivatel_id = null;
     private $adresa_id = null;
 
+    /**
+     * Přihlášení uživatele a ověření skrz databázi
+     * @param <string> $user
+     * @param <string> $password
+     * @return <boolean> přihlášen úspěšně?
+     */
+    public function Authorize($user, $password) {
+
+        $this->username = $username;
+        $this->password = sha1($password) . md5(strlen($password));
+        try {
+            $result = null;
+            $db = new Oci8();
+            $result = $db->UserAuth($this->username, $this->password);
+            unset($db);
+
+            if($result != null) {
+                if(($row['username'] == $username) AND ($row['password'] == $password)) {
+                    $_SESSION['login']=$row['true'];
+                    $_SESSION['username']=$row['username'];
+                    $_SESSION['role'] = $result;
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            }
+        } catch (DibiException $e) {
+            echo get_class($e), ': ', $e->getMessage(), "\n";
+            return false;
+        }
+    }
+     /**
+      * Zkontroluje, zda-li je uživatel přihlášen
+      * @return <boolean> uživatel přihlášen?
+      */
+    public function IsAuthorized() {
+        if(isset($_SESSION['login'])) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+    /**
+     * Odhlášení uživatele
+     */
+    public function Logout() {
+        if($_SESSION['login']) {
+            $_SESSION['login'] = false;
+            $_SESSION = array();
+        }
+        session_destroy();
+    //header("Location: /");
+    }
     public function getLogin() {
         return $this->login;
     }
@@ -87,5 +146,6 @@ class Login {
     public function setAdresa_id($adresa_id) {
         $this->adresa_id = $adresa_id;
     }
+
 }
 ?>
