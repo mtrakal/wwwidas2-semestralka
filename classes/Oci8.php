@@ -210,8 +210,8 @@ class Oci8 {
     public function UserAuth($username, $password) {
         $result = null;
         if(dibi::isConnected()) {
-            $result= dibi::query("select role from TUZIVATEL left join TROLE on TROLE.ROLE_ID=TUZIVATEL.ROLE_ID where NICK='".$username."' and PASSWORD='".$password."'");
-            return $result->fetchSingle();
+            $result= dibi::query("select role as ROLE, nick as USERNAME, password as PASSWORD from TUZIVATEL left join TROLE on TROLE.ROLE_ID=TUZIVATEL.ROLE_ID where NICK='".$username."' and PASSWORD='".$password."'");
+            return $result->fetchAll();
         }
     }
 }

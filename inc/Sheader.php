@@ -100,6 +100,8 @@ else {
                     return false;
                 });
             });
+            $(document).ready(function(){$().bind('cbox_closed',function() 
+            {window.document.location.reload();});}) 
         </script>
         <!-- COLORBOX_konec -->
     </head>
