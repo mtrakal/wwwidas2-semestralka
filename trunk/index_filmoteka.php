@@ -26,6 +26,7 @@ if($login->IsAuthorized()) {
 }
 ?>
 </ul>
+
 </div>
 <!-- end #menu -->
 <div id="page">
@@ -96,20 +97,27 @@ if($login->IsAuthorized()) {
                 setAutoComplete("searchField", "results", "/style/autocomplete/autocomplete.php?part=");
             });
         </script>
+        <script type="text/javascript">
+            function setfocus() {
+                document.form.searchField.focus();
+            }
+        </script>
         <ul>
             <li>
                 <h2>Vyhledávání</h2>
                 <ul>
                     <li id="search">
-                        <label for="searchField">Hledat: </label>
-                        <input id="searchField" name="searchField" type="text" />
-                        <!--<input type="submit" value="Odeslat" />-->
+                        <form method="post" action="#" name="form">
+                            <label for="searchField">Hledat: </label>
+                            <input id="searchField" name="searchField" type="text" />
+                            <!--<input type="submit" value="Odeslat" />-->
+                        </form>
                     </li>
                 </ul>
             </li>
                 <?php
                 if($login->IsAuthorized() && isset($_SESSION['role'])) {
-                    if($_SESSION['role'] = 'Administrator') {
+                    if($_SESSION['role'] == 'Administrator') {
                         ?>
             <li>
                 <h2>Export</h2>
@@ -119,10 +127,10 @@ if($login->IsAuthorized()) {
                     </li>
                 </ul>
             </li>
-        <?php }} ?>
+                    <?php }} ?>
         </ul>
     </div>
-<?php } ?>
+    <?php } ?>
     <?php
     include_once "./inc/Sfooter.php";
 ?>

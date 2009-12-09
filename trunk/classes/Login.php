@@ -12,7 +12,7 @@ class Login {
     private $login = false;
     private $username = null;
     private $password = null;
-    private $role = 'guest';
+    private $role = 'Visitor';
     private $jmeno = null;
     private $prijmeni = null;
     private $email = null;
