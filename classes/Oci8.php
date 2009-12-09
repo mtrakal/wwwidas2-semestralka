@@ -205,7 +205,7 @@ class Oci8 {
      * Ověření uživatele skrz databázi
      * @param <string> $username
      * @param <string> $password
-     * @return <string> Uživatelská role
+     * @return <string> Array[][]
      */
     public function UserAuth($username, $password) {
         $result = null;

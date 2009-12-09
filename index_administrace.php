@@ -7,7 +7,8 @@ if($login->IsAuthorized()) {
     ?>
 <li><a href="/index.php">Hlavní stránka</a></li>
 <li><a href="/index_filmoteka.php">Seznam filmů</a></li>
-<li class="current_page_item"><a href="/inc/Login.php?action=logout">Odhlášení</a></li>
+<li class="current_page_item"><a href="/index_administrace.php">Administrace</a></li>
+<li><a href="/inc/Login.php?action=logout">Odhlášení</a></li>
 </ul>
 </div>
 <!-- end #menu -->

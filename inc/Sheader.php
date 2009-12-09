@@ -105,7 +105,7 @@ else {
         </script>
         <!-- COLORBOX_konec -->
     </head>
-    <body>
+    <body onLoad="setfocus()">
         <div id="wrapper">
             <div id="header">
                 <div id="logo">
