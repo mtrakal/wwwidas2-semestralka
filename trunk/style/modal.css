@@ -31,12 +31,12 @@ html, body {
     background: #F7F7F7 url(/style/img/img02.jpg) repeat-x bottom;
     font-size: 14px;
     color: #5A554E;
-	 min-height: 200px;
+    min-height: 200px;
 }
 input[type=button], input[type=submit]{
-	font-size: 11px;
-	padding: 1px 5px;
-	margin-top: 10px;
+    font-size: 11px;
+    padding: 1px 5px;
+    margin-top: 10px;
 }
 
 h1, h2, h3 {
@@ -55,53 +55,53 @@ h2 {
     font-size: 1.6em;
 }
 #modal {
-	margin: 0px auto;
-	text-align: center;
+    margin: 0px auto;
+    text-align: center;
 }
 #modal form {
-	margin: 0px auto;
-	text-align: right;
+    margin: 0px auto;
+    text-align: right;
 }
 #modal input[type=text],
 #modal input[type=password],
 select {
-	border: none;
-	margin: 0px 0px 0px 5px;
-	width: 120px;
+    border: none;
+    margin: 0px 0px 0px 5px;
+    width: 120px;
 }
 #modal input {
-	font-size: 12px;
+    font-size: 12px;
 }
 .center {
-	text-align: center;
+    text-align: center;
 }
 .req {
-	color: #b90000;
-	font-weight: bold;
+    color: #b90000;
+    font-weight: bold;
 }
 #modal form#add_user {
-	width: 230px;
+    width: 230px;
 }
 #modal form#add_address {
-	width: 230px;
+    width: 230px;
 }
 #modal form#add_borrower {
-	width: 230px;
+    width: 230px;
 }
 #modal form#add_genre {
-	width: 230px;
+    width: 230px;
 }
 #modal form#login {
-	width: 230px;
+    width: 230px;
 }
 #modal a {
-	color: #32639a;
+    color: #32639a;
 }
 #modal a:hover {
-	color: #b90000;
+    color: #b90000;
 }
 #modal p.link {
-	margin-top: 40px;
+    margin-top: 40px;
 }
 
 #modal #add_movie {

@@ -37,30 +37,30 @@ class Login {
             unset($db);
 
             if(($result != null) && ($this->username = $result[0]['USERNAME'] && ($this->password = $result[0]['PASSWORD']))) {
-                    $_SESSION['login']=true;
-                    $_SESSION['username']=$result[0]['USERNAME'];
-                    $_SESSION['role'] = $result[0]['ROLE'];
-                    return true;
-						} else {
-                    return false;
+                $_SESSION['login']=true;
+                $_SESSION['username']=$result[0]['USERNAME'];
+                $_SESSION['role'] = $result[0]['ROLE'];
+                return true;
+            } else {
+                return false;
             }
-            
+
         } catch (DibiException $e) {
             echo get_class($e), ': ', $e->getMessage(), "\n";
             return false;
         }
     }
-     /**
-      * Zkontroluje, zda-li je uživatel přihlášen
-      * @return <boolean> uživatel přihlášen?
-      */
+    /**
+     * Zkontroluje, zda-li je uživatel přihlášen
+     * @return <boolean> uživatel přihlášen?
+     */
     public function IsAuthorized() {
         if(isset($_SESSION['login'])) {
-					if($_SESSION['login']) {
-            return true;
-          } else {
-						return false;
-					}
+            if($_SESSION['login']) {
+                return true;
+            } else {
+                return false;
+            }
         }
         else {
             return false;
