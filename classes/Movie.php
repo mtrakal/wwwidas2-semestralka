@@ -15,7 +15,7 @@ class Movie {
     private $rok = null;
     private $delka = null;
     private $popis = null;
-    
+
     public function Add($original, $cz = null, $en = null, $csfd = null, $imdb = null, $rok = null, $delka = null, $popis = null) {
         $this->original = $original;
         $this->cz = $cz;

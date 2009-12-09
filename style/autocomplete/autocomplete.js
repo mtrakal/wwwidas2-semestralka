@@ -28,7 +28,7 @@ function setAutoComplete(field_id, results_id, get_url){
 	acURL 		= get_url;
 
 	// create the results div
-	$("body").append('<div id="' + results_id + '"></div>');
+	$(".entry").append('<div id="' + results_id + '"></div>'); //trtkal edit
 
 	// register mostly used vars
 	acSearchField	= $(acSearchId);
@@ -138,10 +138,9 @@ function repositionResultsDiv()
 
 	// get the field size
 	var sf_height = acSearchField.height();
-	var sf_width  = acSearchField.width()+300; //trtkal edit
+	var sf_width  = acSearchField.width()+400; //trtkal edit
 
 	// apply the css styles - optimized for Firefox
-	acResultsDiv.css("position","absolute");
 	acResultsDiv.css("left", sf_left - 2);
 	acResultsDiv.css("top", sf_top + sf_height + 5);
 	acResultsDiv.css("width", sf_width - 2);

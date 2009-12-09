@@ -7,7 +7,8 @@ require_once dirname(__FILE__) . "/inc/Sheader.php";
 <?php
 	$login = new Login();
 	if($login->IsAuthorized()) {
-		echo '<li><a href="/index_administrace.php">Administrace</a></li>';
+            echo '<li><a href="/index_administrace.php">Administrace</a></li>'."\n".
+                '<li><a href="/inc/Login.php?action=logout">Odhlášení</a></li>';
 	} else {
 		echo '<li><a href="/inc/Login.php" class="iframe">Administrace</a></li>';
 	}

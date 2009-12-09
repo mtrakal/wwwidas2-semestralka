@@ -1,5 +1,7 @@
 <?php
+require_once dirname(__FILE__) . '/classes/Movie.php';
 require_once dirname(__FILE__) . '/classes/Login.php';
+
 if(isset($_GET['export'])) {
     if($_GET['export']=='xml') {
         include_once dirname(__FILE__) . '/classes/XMLParse.php';
@@ -8,22 +10,21 @@ if(isset($_GET['export'])) {
         die();
     }
 }
-?>
-<?php
-require_once dirname(__FILE__) . '/classes/Movie.php';
+
 
 include_once "./inc/Sheader.php";
 ?>
 <li><a href="/index.php">Hlavní stránka</a></li>
 <li class="current_page_item"><a href="/index_filmoteka.php">Seznam filmů</a></li>
 <?php
-	$login = new Login();
-	if($login->IsAuthorized()) {
-		echo '<li><a href="/index_administrace.php">Administrace</a></li>';
-	} else {
-		echo '<li><a href="/inc/Login.php" class="iframe">Administrace</a></li>';
-	}
-	?>
+$login = new Login();
+if($login->IsAuthorized()) {
+    echo '<li><a href="/index_administrace.php">Administrace</a></li>'."\n".
+        '<li><a href="/inc/Login.php?action=logout">Odhlášení</a></li>';
+} else {
+    echo '<li><a href="/inc/Login.php" class="iframe">Administrace</a></li>';
+}
+?>
 </ul>
 </div>
 <!-- end #menu -->
@@ -83,27 +84,7 @@ include_once "./inc/Sheader.php";
         <div class="post">
             <h2 class="title"><a href="#">Výsledky vyhledávání</a></h2>
             <div class="entry">
-                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
-                    <p>
-                        <textarea name="text2" rows="20" cols="90" id="text2">
-Vítejte!
---------
 
-Můžete používat syntax Texy!, pokud Vám vyhovuje:
-- třeba **tučné** písmo nebo *kurzíva*
-- a takto se dělá "odkaz":http://texy.info
-- více najdete na stránce syntax:[syntax]
-
-
-Ale také můžete zůstat u HTML:
-- takto &lt;b&gt;HTML&lt;/b&gt;
-- nebo i &lt;b class=xx&gt;úplně &lt;i&gt;hloupě&lt;/b&gt;, Texy! to pořeší
-
-
-[syntax]: /cs/syntax
-                        </textarea>
-                    </p>
-                </form>
             </div>
         </div>
         <div class="cleaner both">&nbsp;</div>
@@ -122,10 +103,14 @@ Ale také můžete zůstat u HTML:
                     <li id="search">
                         <label for="searchField">Hledat: </label>
                         <input id="searchField" name="searchField" type="text" />
-                        <input type="submit" value="Odeslat" />
+                        <!--<input type="submit" value="Odeslat" />-->
                     </li>
                 </ul>
             </li>
+                <?php
+                if($login->IsAuthorized() && isset($_SESSION['role'])) {
+                    if($_SESSION['role'] = 'Administrator') {
+                        ?>
             <li>
                 <h2>Export</h2>
                 <ul>
@@ -134,9 +119,10 @@ Ale také můžete zůstat u HTML:
                     </li>
                 </ul>
             </li>
+        <?php }} ?>
         </ul>
     </div>
-    <?php } ?>
+<?php } ?>
     <?php
     include_once "./inc/Sfooter.php";
 ?>
