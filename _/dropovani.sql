@@ -1,4 +1,4 @@
-/* TABULKY */
+﻿/* TABULKY */
 drop table ttitulzanr cascade constraints
 /
 drop table tzanr cascade constraints

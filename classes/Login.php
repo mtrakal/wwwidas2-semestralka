@@ -148,6 +148,5 @@ class Login {
     public function setAdresa_id($adresa_id) {
         $this->adresa_id = $adresa_id;
     }
-
 }
 ?>

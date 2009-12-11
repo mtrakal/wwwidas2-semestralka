@@ -1,8 +1,7 @@
-/* SEKVENCE */
+﻿/* SEKVENCE */
 CREATE SEQUENCE sformattitulku_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE stitulky_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE sjazyk_id INCREMENT BY 1 START WITH 1 nomaxvalue;
---CREATE SEQUENCE suzivatel_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE srole_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE sadresa_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE svypujcka_id INCREMENT BY 1 START WITH 1 nomaxvalue;
@@ -10,6 +9,7 @@ CREATE SEQUENCE sfilm_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE szanr_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE skatalogove_cislo INCREMENT BY 1 START WITH 1 nomaxvalue;
 CREATE SEQUENCE sformatfilmu_id INCREMENT BY 1 START WITH 1 nomaxvalue;
+--CREATE SEQUENCE suzivatel_id INCREMENT BY 1 START WITH 1 nomaxvalue;
 /
 
 /* TRIGGERY */
@@ -41,6 +41,24 @@ CREATE OR REPLACE FORCE VIEW movie_count ("POCET_FILMU") AS SELECT count(film_id
 /
 CREATE OR REPLACE FORCE VIEW users_count ("POCET_UZIVATELU") AS SELECT count(nick) as pocet_uzivatelu FROM tuzivatel;
 /
+
+/* FUNKCE */
+create or replace
+function f_pocetnevracenychfilmu return number as
+  pocet_pujcenych number;
+begin
+  select count(*) into pocet_pujcenych from tpujcujici
+  left join tvypujcka on tvypujcka.datum_vraceni is null
+  where tvypujcka.nick = tpujcujici.nick
+  order by tpujcujici.prijmeni;
+  return pocet_pujcenych;
+end f_pocetnevracenychfilmu;
+/
+
+/* použití*/
+select f_pocetnevracenychfilmu as NEVRACENYCH from dual;
+
+/* PROCEDURY */
 
 
 
@@ -96,3 +114,61 @@ INSERT INTO "ST22312"."TTITUL" (CZ, EN, ORIGINAL, CSFD, IMDB, ROK_VYDANI, DELKA,
 -- pozor je tam "'" INSERT INTO "ST22312"."TTITUL" (CZ, EN, ORIGINAL, CSFD, IMDB, ROK_VYDANI, DELKA, POPIS) VALUES ('13. podlaží', 'The thirteen\'s floor', '', '', '', '', '', '');
 INSERT INTO "ST22312"."TTITUL" (CZ, EN, ORIGINAL, CSFD, IMDB, ROK_VYDANI, DELKA, POPIS) VALUES ('Resident Evil', 'Resident Evil', 'Resident Evil', 'http://www.csfd.cz/film/151-resident-evil/', 'http://www.imdb.com/title/tt0120804/', '2002', '97', 'Tajemná společnost Umbrella Corporation, zabývající se genetickým výzkumem, provádí ve svých rozsáhlých podzemních laboratořích velice nebezpečné pokusy. V jednu chvíli uniká smrtící virus a centrální počítač laboratoře - Red Queen - uzavírá neprodyšně celou zasaženou oblast podzemního labyrintu a nechává zaměstnance, zasažené virem, uvnitř celého pekla. Elitní komando v čele s Alicí (Milla Jovovich) a Rain (Michelle Rodriguez) dostává úkol, který je otázkou života a smrti - izolovat virus, který ohrožuje celé lidstvo zjistit příčinu. Brzo zjišťují, že všechno je ještě horší než čekali - virem zasažení zaměstnanci nejsou ani živí ani mrtví - nyní jsou z nich mimořádně agresivní zombie - Nemrtvé bestie, které se skrývají v místě katastrofy. Jediné jejich škrábnutí nebo kousnutí infikuje zasaženého, který se okamžitě začne měnit v jejich druh. Alice a její vojenský tým má tři hodiny na to dokončit misi, než Nemrtví proniknou na povrch Země. Čeká je souboj s krvežíznivými bestiemi bez jakýkoli zábran a další děsivé překvapení v nitru laboratoře - zmutovaní psi a jiné výsledky experimentů. A ještě se proti nim postaví centrální počítač - Red Queen a ten, kdo to celé spustil. Dokáže tým překonat počítač, najít antivirus a ubránit se Nemrtvým? Kdo tohle peklo oživlého zla dokáže přežít? A kdo a kde je ten, jehož pomsta ohrožuje celé lidstvo? Filmové zpracování populární hry plné akce, napětí a atraktivní hudby, přenáší zběsilé tempo celého dobrodružství na plátno a zachovává jedinečnost kultu jménem "Resident Evil.');
 
+/* DATA */
+Insert into TUZIVATEL (NICK,PASSWORD,ROLE_ID) values ('trtkal','6e017b5464f820a6c1bb5e9f6d711a667a80d8eae4da3b7fbbce2345d7772b0674a318d5',3);
+
+INSERT INTO "ST22312"."TTITULZANR" (FILM_ID, ZANR_ID) VALUES ('1', '3');
+INSERT INTO "ST22312"."TTITULZANR" (FILM_ID, ZANR_ID) VALUES ('2', '3');
+INSERT INTO "ST22312"."TTITULZANR" (FILM_ID, ZANR_ID) VALUES ('2', '1');
+INSERT INTO "ST22312"."TTITULZANR" (FILM_ID, ZANR_ID) VALUES ('2', '5');
+INSERT INTO "ST22312"."TTITULZANR" (FILM_ID, ZANR_ID) VALUES ('3', '3');
+INSERT INTO "ST22312"."TTITULZANR" (FILM_ID, ZANR_ID) VALUES ('4', '6');
+INSERT INTO "ST22312"."TTITULZANR" (FILM_ID, ZANR_ID) VALUES ('4', '4');
+
+INSERT INTO "ST22312"."TUZIVATEL" (NICK, PASSWORD, ROLE_ID) VALUES ('stepas', '6e017b5464f820a6c1bb5e9f6d711a667a80d8eae4da3b7fbbce2345d7772b0674a318d5', '2');
+INSERT INTO "ST22312"."TUZIVATEL" (NICK, PASSWORD, ROLE_ID) VALUES ('art', '6e017b5464f820a6c1bb5e9f6d711a667a80d8eae4da3b7fbbce2345d7772b0674a318d5', '2');
+UPDATE "ST22312"."TUZIVATEL" SET NICK = 'stepis' WHERE ROWID = 'AAAWUJAAGAAAnRYAAB' AND ORA_ROWSCN = '24138444';
+
+INSERT INTO "ST22312"."TPUJCUJICI" (ADRESA_ID, JMENO, PRIJMENI, EMAIL, NICK) VALUES ('3', 'Štěpán', 'Šonský', 'ssonsky@seznam.cz', 'shawn');
+INSERT INTO "ST22312"."TPUJCUJICI" (ADRESA_ID, JMENO, PRIJMENI, EMAIL, TELEFON, NICK) VALUES ('3', 'Štěpán', 'Gajzler', 'stepis@gmail.com', '44582934', 'stepis');
+INSERT INTO "ST22312"."TPUJCUJICI" (ADRESA_ID, JMENO, PRIJMENI, EMAIL, TELEFON, NICK) VALUES ('3', 'Artur', 'Cimbálník', 'art@gmail.com', '7762937012', 'art');
+
+INSERT INTO "ST22312"."TPUJCUJICI" (ADRESA_ID, JMENO, PRIJMENI, EMAIL, NICK) VALUES ('3', 'Štěpán', 'Šonský', 'ssonsky@seznam.cz', 'shawn');
+INSERT INTO "ST22312"."TPUJCUJICI" (ADRESA_ID, JMENO, PRIJMENI, EMAIL, TELEFON, NICK) VALUES ('3', 'Štěpán', 'Gajzler', 'stepis@gmail.com', '44582934', 'stepis');
+INSERT INTO "ST22312"."TPUJCUJICI" (ADRESA_ID, JMENO, PRIJMENI, EMAIL, TELEFON, NICK) VALUES ('3', 'Artur', 'Cimbálník', 'art@gmail.com', '7762937012', 'art');
+
+INSERT INTO "ST22312"."TFILMOTEKA" (FILM_ID, FORMATFILMU_ID, HODNOCENI, DATUM_PRIDANI, VELIKOST, UMISTENI) VALUES ('1', '3', '5', TO_DATE('11.12.09', 'DD.MM.RR'), '728837261', 'F43');
+INSERT INTO "ST22312"."TFILMOTEKA" (FILM_ID, FORMATFILMU_ID, HODNOCENI, DATUM_PRIDANI, VELIKOST, UMISTENI) VALUES ('1', '1', '5', TO_DATE('11.12.09', 'DD.MM.RR'), '4503839273', 'F44');
+INSERT INTO "ST22312"."TFILMOTEKA" (FILM_ID, FORMATFILMU_ID, HODNOCENI, DATUM_PRIDANI, VELIKOST, UMISTENI) VALUES ('2', '5', '5', TO_DATE('11.12.09', 'DD.MM.RR'), '728372802', 'F55');
+INSERT INTO "ST22312"."TFILMOTEKA" (FILM_ID, FORMATFILMU_ID, HODNOCENI, DATUM_PRIDANI, VELIKOST, UMISTENI) VALUES ('3', '7', '4', TO_DATE('11.12.09', 'DD.MM.RR'), '453245765', 'F21');
+INSERT INTO "ST22312"."TFILMOTEKA" (FILM_ID, FORMATFILMU_ID, HODNOCENI, DATUM_PRIDANI, VELIKOST, UMISTENI) VALUES ('4', '11', '3', TO_DATE('11.12.09', 'DD.MM.RR'), '443576749', 'F11');
+INSERT INTO "ST22312"."TFILMOTEKA" (FILM_ID, FORMATFILMU_ID, HODNOCENI, DATUM_PRIDANI, VELIKOST, UMISTENI) VALUES ('4', '3', '4', TO_DATE('04.12.09', 'DD.MM.RR'), '4876354829', 'F33');
+
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('1', '1');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('2', '3');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('2', '5');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('2', '1');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('3', '1');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('3', '4');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('4', '1');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('5', '2');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('6', '1');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('6', '2');
+INSERT INTO "ST22312"."TJAZYK_FILMU" (KATALOGOVE_CISLO, JAZYK_ID) VALUES ('6', '6');
+
+INSERT INTO "ST22312"."TTITULKY" (KATALOGOVE_CISLO, TITULKY, FORMATTITULKU_ID, JAZYK_ID) VALUES ('1', 'interní', '6', '1');
+INSERT INTO "ST22312"."TTITULKY" (KATALOGOVE_CISLO, TITULKY, FORMATTITULKU_ID, JAZYK_ID) VALUES ('2', 'amelie.cz.ass', '1', '1');
+INSERT INTO "ST22312"."TTITULKY" (KATALOGOVE_CISLO, TITULKY, FORMATTITULKU_ID, JAZYK_ID) VALUES ('2', 'amelie.cz.srt', '4', '1');
+INSERT INTO "ST22312"."TTITULKY" (KATALOGOVE_CISLO, TITULKY, FORMATTITULKU_ID, JAZYK_ID) VALUES ('3', 'cesta do fantazie.cz.sub', '3', '1');
+INSERT INTO "ST22312"."TTITULKY" (KATALOGOVE_CISLO, TITULKY, FORMATTITULKU_ID, JAZYK_ID) VALUES ('3', 'cesta do fantazie.en.aas', '2', '2');
+INSERT INTO "ST22312"."TTITULKY" (KATALOGOVE_CISLO, TITULKY, FORMATTITULKU_ID, JAZYK_ID) VALUES ('5', 'resident.cz.sub', '3', '1');
+INSERT INTO "ST22312"."TTITULKY" (KATALOGOVE_CISLO, TITULKY, FORMATTITULKU_ID, JAZYK_ID) VALUES ('6', 'resident.cz.ass', '1', '1');
+
+INSERT INTO "ST22312"."TVYPUJCKA" (KATALOGOVE_CISLO, DATUM_PUJCENI, DATUM_VRACENI, NICK) VALUES ('1', TO_DATE('11.12.09', 'DD.MM.RR'), TO_DATE('13.12.09', 'DD.MM.RR'), 'stepis');
+INSERT INTO "ST22312"."TVYPUJCKA" (KATALOGOVE_CISLO, DATUM_PUJCENI, DATUM_VRACENI, NICK) VALUES ('1', TO_DATE('14.12.09', 'DD.MM.RR'), TO_DATE('15.12.09', 'DD.MM.RR'), 'art');
+INSERT INTO "ST22312"."TVYPUJCKA" (KATALOGOVE_CISLO, DATUM_PUJCENI, DATUM_VRACENI, NICK) VALUES ('3', TO_DATE('11.12.09', 'DD.MM.RR'), TO_DATE('12.12.09', 'DD.MM.RR'), 'shawn');
+INSERT INTO "ST22312"."TVYPUJCKA" (KATALOGOVE_CISLO, DATUM_PUJCENI, DATUM_VRACENI, NICK) VALUES ('2', TO_DATE('11.12.10', 'DD.MM.RR'), TO_DATE('13.12.10', 'DD.MM.RR'), 'stepis');
+INSERT INTO "ST22312"."TVYPUJCKA" (KATALOGOVE_CISLO, DATUM_PUJCENI, NICK) VALUES ('5', TO_DATE('11.11.09', 'DD.MM.RR'), 'shawn');
+INSERT INTO "ST22312"."TVYPUJCKA" (KATALOGOVE_CISLO, DATUM_PUJCENI, NICK) VALUES ('6', TO_DATE('09.12.09', 'DD.MM.RR'), 'shawn');
+INSERT INTO "ST22312"."TVYPUJCKA" (KATALOGOVE_CISLO, DATUM_PUJCENI, NICK) VALUES ('4', TO_DATE('06.10.09', 'DD.MM.RR'), 'art');
+INSERT INTO "ST22312"."TVYPUJCKA" (KATALOGOVE_CISLO, DATUM_PUJCENI, NICK) VALUES ('3', TO_DATE('12.01.10', 'DD.MM.RR'), 'stepis');
