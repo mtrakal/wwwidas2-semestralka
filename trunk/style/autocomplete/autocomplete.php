@@ -29,8 +29,14 @@ if(isset($_GET['part']) and $_GET['part'] != '') {
     };
     unset ($pom);
 
-    // return the array as json with PHP 5.2
-    echo json_encode($results);
+    if (!function_exists('json_encode') && version_compare(PHP_VERSION, '5.2.0', '<')) {
+        require_once dirname(__FILE__) . '/../../classes/FuckingOldPHP.php';
+        $json = new FuckingOldPHP();
+        echo $json->array_to_json($results);
+    } else {
+        // return the array as json with PHP 5.2
+        echo json_encode($results);
+    }
 
 // or return using Zend_Json class
 //require_once('Zend/Json/Encoder.php');
