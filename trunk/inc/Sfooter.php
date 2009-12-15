@@ -17,7 +17,7 @@
         </div>
         <div id="footer">
             <p>(c) 2009 <a href="http://blog.trtkal.net">Trtkal</a> pro semestrální práci z předmětu IWWW a IDAS2.<br />
-	CSS template využit a upraven z <a href="http://www.freecsstemplates.org">freetemplates.org.</a></p>
+	CSS template využit a upraven z <a href="http://www.freecsstemplates.org">freecsstemplates.org.</a></p>
         </div>
         <!-- end #footer -->
         <?php
