@@ -14,5 +14,8 @@ class Init {
             $this->dirname == $_SERVER['DOCUMENT_ROOT'];
         }
     }
+    public function getDirname() {
+        return $this->dirname;
+    }
 }
 ?>

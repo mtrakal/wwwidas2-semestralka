@@ -16,18 +16,37 @@ class Movie {
     private $delka = null;
     private $popis = null;
 
+    /**
+     * Přidání titulu filmu do databáze
+     * @param <string> $original
+     * @param <string> $cz
+     * @param <string> $en
+     * @param <string> $csfd
+     * @param <string> $imdb
+     * @param <integer> $rok
+     * @param <integer> $delka
+     * @param <string> $popis
+     * @return <boolean> Proběhlo přidávání v pořádku?
+     */
     public function Add($original, $cz = null, $en = null, $csfd = null, $imdb = null, $rok = null, $delka = null, $popis = null) {
-        $this->original = $original;
-        $this->cz = $cz;
-        $this->en = $en;
-        $this->csfd = $csfd;
-        $this->imdb = $imdb;
-        $this->rok = $rok;
-        $this->delka = $delka;
-        $this->popis = $popis;
+        try {
+            $this->original = $original;
+            $this->cz = $cz;
+            $this->en = $en;
+            $this->csfd = $csfd;
+            $this->imdb = $imdb;
+            $this->rok = $rok;
+            $this->delka = $delka;
+            $this->popis = $popis;
 
-        $db = new Oci8();
-        $db->MovieAdd($this->original, $this->cz, $this->en, $this->csfd, $this->imdb, $this->rok, $this->delka, $this->popis);
+            $db = new Oci8();
+            $db->MovieAdd($this->original, $this->cz, $this->en, $this->csfd, $this->imdb, $this->rok, $this->delka, $this->popis);
+            unset ($db);
+            return true;
+        } catch (DibiException $e) {
+            echo get_class($e), ': ', $e->getMessage(), "\n";
+            return false;
+        }
     }
     public function Edit() {
         ;

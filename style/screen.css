@@ -1,9 +1,8 @@
 /* 
     Document   : screen
     Created on : 23.10.2009, 2:56:58
-    Author     : Administrator
-    Description:
-        Purpose of the stylesheet follows.
+    Author     : trtkal
+    Description: Purpose of the stylesheet follows.
 */
 
 /*
@@ -145,16 +144,16 @@ h2 a {
 }
 
 #search form {
-/* _ */
+    /* _ */
 }
 
 #search label {
-	 padding: 0 5px 0 10px;
+    padding: 0 5px 0 10px;
 }
 #search input[type=button], #search input[type=submit]{
-	font-size: 11px;
-	padding: 1px 5px;
-	margin-top: 10px;
+    font-size: 11px;
+    padding: 1px 5px;
+    margin-top: 10px;
 }
 #search input[type=text] {
     width: 110px;
@@ -227,7 +226,7 @@ h2 a {
     margin: 0px auto;
     padding: 20px 50px 0px 50px;
     background: #FFFFFF;
-	 min-height: 250px;
+    min-height: 250px;
 }
 
 /* Content */
@@ -351,7 +350,7 @@ strong {
 }
 
 #sidebar li ul {
-/* _ */
+    /* _ */
 }
 
 #sidebar li li {
@@ -516,27 +515,27 @@ strong {
 }
 
 #login {
-	margin: 0px auto;
-	width: 300px;
-	text-align: center;
+    margin: 0px auto;
+    width: 300px;
+    text-align: center;
 }
 #login form {
-	margin: 0px auto;
-	text-align: right;
-	width: 200px;
+    margin: 0px auto;
+    text-align: right;
+    width: 200px;
 }
 #login input[type=text], #login input[type=password]{
-	border: none;
-	margin: 0px 0px 0px 5px;
-	width: 120px;
+    border: none;
+    margin: 0px 0px 0px 5px;
+    width: 120px;
 }
 #content ul {
-	padding-left: 10px;
-	list-style: disc;
-	list-style-position: inside;
+    padding-left: 10px;
+    list-style: disc;
+    list-style-position: inside;
 }
 #content ol {
-	padding-left: 10px;
-	list-style: decimal;
-	list-style-position: inside;
+    padding-left: 10px;
+    list-style: decimal;
+    list-style-position: inside;
 }

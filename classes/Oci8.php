@@ -214,5 +214,14 @@ class Oci8 {
             return $result->fetchAll();
         }
     }
+    public function MovieAdd($original, $cz = null, $en = null, $csfd = null, $imdb = null, $rok = null, $delka = null, $popis = null) {
+        $result = null;
+        if(dibi::isConnected()) {
+            $result = dibi::query("insert into TTITUL (original, cz, en, csfd, imdb, rok_vydani, delka, popis) values ('".$original."','".$cz."','".$en."','".$csfd."','".$imdb."', '".$rok."', '".$delka."', '".$popis."')");
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
 ?>
