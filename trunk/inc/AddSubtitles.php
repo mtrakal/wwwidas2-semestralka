@@ -6,21 +6,21 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link href="/style/modal.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
-        <title>Přidání žánru</title>
-        <script type="text/javascript">
+        <title>Přidání titulků</title>
+      <script type="text/javascript">
             function setfocus() {
-                document.getElementsByName("genre")[0].focus();
+                document.getElementsByName("titulky")[0].focus();
             }
         </script>
     </head>
     <body onload="setfocus()">
         <div id="modal">
-            <h1>Přidání žánru</h1>
+            <h1>Přidání titulků</h1>
             <?php
-            if(isset($_POST['genre'])) {
-                include_once dirname(__FILE__) . '/../classes/Genre.php';
-                $genreadd = new Genre();
-                if($genreadd->Add($_POST['genre'])) {
+            if(isset($_POST['titulky'])) {
+                include_once dirname(__FILE__) . '/../classes/Subtitles.php';
+                $subtitlesadd = new Subtitles();
+                if($subtitlesadd->Add($_POST['id_filmu'], $_POST['titulky'], $_POST['format'], $_POST['jazyk'])) {
                     echo "<h2>Přidání proběhlo v pořádku</h2><p class=\"link\"><a href=\"".$_SERVER['PHP_SELF']."\">Přidat další</a></p>";
                 } else {
                     echo "<h2>Nastala chyba</h2>";

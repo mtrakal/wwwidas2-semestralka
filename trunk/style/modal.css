@@ -1,15 +1,9 @@
 /* 
-    Document   : screen
+    Document   : modal
     Created on : 23.10.2009, 2:56:58
     Author     : Administrator
     Description:
         Purpose of the stylesheet follows.
-*/
-
-/*
-Design by Free CSS Templates
-http://www.freecsstemplates.org
-Released for free under a Creative Commons Attribution 2.5 License
 */
 * {
     line-height: 1.4em;
@@ -100,5 +94,8 @@ select {
 }
 
 #modal #add_movie {
-    width:300px;
+    width:550px;
+}
+#modal #add_movie .texyla {
+    text-align: left;
 }

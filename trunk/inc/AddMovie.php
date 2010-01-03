@@ -6,7 +6,7 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <link href="/style/modal.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
-        <title>Přidání titulků</title>
+        <title>Přidání titulu</title>
         <!-- jQUERY -->
         <script type="text/javascript" src="/style/texyla/jquery/jquery.js"></script>
         <script type="text/javascript" src="/style/texyla/jquery/jquery-ui.js"></script>
@@ -19,12 +19,12 @@
         <script type="text/javascript">
             //<![CDATA[
 
-            $(function () {
+            $(function() {
                 $.texyla("setDefaults", {
                     // language: "en"
                 });
 
-                $("#text2").texyla({
+                $("#popis").texyla({
                     toolbar: [
                         'h1', 'h2', 'h3', 'h4',
                         null,
@@ -47,15 +47,15 @@
                     bottomLeftToolbar: ['edit', 'preview', 'htmlPreview'],
                     tabs: true,
                     texyCfg: "admin",
-                    width: 800
+                    width: 700
                 });
 
                 $.texyla({
-                    texyCfg: "forum",
-                    buttonType: "button"
+                    texyCfg: "admin",
+                    buttonType: "span"
 
                 });
-            });
+            })(jQuery);
             //]]></script>
         <!-- TEXYLA_konec -->
         <script type="text/javascript">
@@ -66,12 +66,20 @@
     </head>
     <body onload="setfocus()">
         <div id="modal">
-            <h1>Přidání titulků</h1>
+            <h1>Přidání titulu</h1>
             <?php
-            if(isset($_POST['titulky'])) {
-                include_once dirname(__FILE__) . '/../classes/Subtitles.php';
-                $subtitlesadd = new Movie();
-                if($subtitlesadd->Add($_POST['id_filmu'], $_POST['titulky'], $_POST['format'], $_POST['jazyk'])) {
+/*
+            if(isset($_POST['popis'])) {
+                require dirname(__FILE__) . "/../style/texyla/php/texyla.php";
+                $texyla = TexylaTools::getTexy('admin');
+                $text = get_magic_quotes_gpc() ? stripslashes($_POST["popis"]) : $_POST["popis"];
+                $html = $texyla->process($text);
+            }
+*/
+            if(isset($_POST['original'])) {
+                include_once dirname(__FILE__) . '/../classes/Movie.php';
+                $movie = new Movie();
+                if($movie->Add($_POST['original'], $_POST['cz'], $_POST['en'], $_POST['csfd'], $_POST['imdb'], $_POST['rok'], $_POST['delka'], $_POST['popis'])) {
                     echo "<h2>Přidání proběhlo v pořádku</h2><p class=\"link\"><a href=\"".$_SERVER['PHP_SELF']."\">Přidat další</a></p>";
                 } else {
                     echo "<h2>Nastala chyba</h2>";
@@ -87,11 +95,11 @@
                     <label title="Odkaz na imdb">IMDB:</label><input type="text" name="imdb" /><br />
                     <label class="req" title="Rok vydání">Rok:</label><input type="text" name="rok" /><br />
                     <label class="req">Délka:</label><input type="text" name="delka" /><br />
-                    <label class="req" title="Popis filmu">Popis:</label><textarea name="popis" rows="20" cols="90" id="text2"></textarea>
+                    <label class="req" title="Popis filmu">Popis:</label><textarea name="popis" rows="20" cols="90" id="popis"></textarea>
                 </p>
                 <!--<div class="center"><input type="submit" value="Přidat" /></div>-->
             </form>
-            <?php } ?>
+                <?php } ?>
         </div>
     </body>
 </html>
