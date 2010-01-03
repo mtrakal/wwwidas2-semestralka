@@ -157,6 +157,7 @@ strong {
     float: right;
     width: 273px;
     padding: 0px;
+    display: none;
 }
 
 #sidebar ul {

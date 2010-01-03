@@ -21,11 +21,11 @@ if(isset($_GET['action'])) {
         <title>Vstup do administrace</title>
         <script type="text/javascript">
             function setfocus() {
-                document.form.username.focus();
+                document.getElementsByName("username")[0].focus();
             }
         </script>
     </head>
-    <body onLoad="setfocus()">
+    <body onload="setfocus()">
         <div id="modal">
             <h1>Vstup do administrace</h1>
             <?php
@@ -40,7 +40,7 @@ if(isset($_GET['action'])) {
             } else {
                 ?>
             <h2>Přihlášení</h2>
-            <form id="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
+            <form id="login" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <p>
                     <label class="req">Jméno:</label><input type="text" name="username" /><br />
                     <label class="req">Heslo:</label><input type="password" name="password" />

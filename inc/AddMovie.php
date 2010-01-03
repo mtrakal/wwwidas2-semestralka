@@ -60,11 +60,11 @@
         <!-- TEXYLA_konec -->
         <script type="text/javascript">
             function setfocus() {
-                document.form.titulky.focus();
+                document.getElementsByName("titulky")[0].focus();
             }
         </script>
     </head>
-    <body onLoad="setfocus()">
+    <body onload="setfocus()">
         <div id="modal">
             <h1>Přidání titulků</h1>
             <?php
@@ -78,7 +78,7 @@
                 }
             } else {
                 ?>
-            <form id="add_movie" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
+            <form id="add_movie" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <p>
                     <label class="req">Originální název:</label><input type="text" name="original" /><br />
                     <label>Český název:</label><input type="text" name="cz" /><br />

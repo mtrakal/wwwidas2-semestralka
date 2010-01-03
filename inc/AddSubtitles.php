@@ -9,11 +9,11 @@
         <title>Přidání žánru</title>
         <script type="text/javascript">
             function setfocus() {
-                document.form.genre.focus();
+                document.getElementsByName("genre")[0].focus();
             }
         </script>
     </head>
-    <body onLoad="setfocus()">
+    <body onload="setfocus()">
         <div id="modal">
             <h1>Přidání žánru</h1>
             <?php
@@ -27,7 +27,7 @@
                 }
             } else {
                 ?>
-            <form id="add_genre" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
+            <form id="add_genre" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <p>
                     <label class="req">Žánr:</label><input type="text" name="genre" /><br />
                 </p>
