@@ -99,7 +99,7 @@ if($login->IsAuthorized()) {
         </script>
         <script type="text/javascript">
             function setfocus() {
-                document.form.searchField.focus();
+                document.getElementsByName("searchField")[0].focus();
             }
         </script>
         <ul>
@@ -107,9 +107,9 @@ if($login->IsAuthorized()) {
                 <h2>Vyhledávání</h2>
                 <ul>
                     <li id="search">
-                        <form method="post" action="#" name="form">
-                            <label for="searchField">Hledat: </label>
-                            <input id="searchField" name="searchField" type="text" />
+                        <form method="post" action="#">
+                            <p><label for="searchField">Hledat: </label>
+                            <input id="searchField" name="searchField" type="text" /></p>
                             <!--<input type="submit" value="Odeslat" />-->
                         </form>
                     </li>
@@ -118,7 +118,7 @@ if($login->IsAuthorized()) {
                 <?php
                 if($login->IsAuthorized() && isset($_SESSION['role'])) {
                     if($_SESSION['role'] == 'Administrator') {
-                        ?>
+                ?>
             <li>
                 <h2>Export</h2>
                 <ul>

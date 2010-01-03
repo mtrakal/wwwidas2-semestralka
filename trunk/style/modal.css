@@ -23,7 +23,7 @@ Released for free under a Creative Commons Attribution 2.5 License
 html, body {
     margin: 9px 0px 0px 0px;
     padding: 0;
-    background: #F7F7F7 url(/style/img/img02.jpg) repeat-x bottom;
+    background: #f7f7f7 url('/style/img/img02.jpg') bottom repeat-x;
     font-size: 14px;
     color: #5A554E;
     min-height: 200px;

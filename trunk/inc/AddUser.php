@@ -9,11 +9,11 @@
         <title>Přidání uživatele</title>
         <script type="text/javascript">
             function setfocus() {
-                document.form.username.focus();
+                document.getElementsByName("username")[0].focus();
             }
         </script>
     </head>
-    <body onLoad="setfocus()">
+    <body onload="setfocus()">
         <div id="modal">
             <h1>Přidání uživatele</h1>
             <?php
@@ -27,7 +27,7 @@
                 }
             } else {
                 ?>
-            <form id="add_user" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
+            <form id="add_user" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <p>
                     <label class="req">Přezdívka:</label><input type="text" name="username" /><br />
                     <label class="req">Role:</label>

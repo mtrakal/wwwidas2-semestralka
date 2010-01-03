@@ -33,11 +33,11 @@ echo $page;
         <title>Přidání uživatele</title>
         <script type="text/javascript">
             function setfocus() {
-                document.form.street.focus();
+                document.getElementsByName("street")[0].focus();
             }
         </script>
     </head>
-    <body onLoad="setfocus()">
+    <body onload="setfocus()">
         <div id="modal">
             <h1>Přidání adresy</h1>
             <?php
@@ -51,7 +51,7 @@ echo $page;
                 }
             } else {
                 ?>
-            <form id="add_address" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" name="form">
+            <form id="add_address" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
                 <p>
                     <label class="req">Ulice:</label><input type="text" name="street" /><br />
                     <label class="req">ČP:</label><input type="text" name="number" /><br />

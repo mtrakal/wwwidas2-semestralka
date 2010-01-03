@@ -21,11 +21,14 @@ Released for free under a Creative Commons Attribution 2.5 License
     text-decoration: none;
     font-family: Georgia, "Times New Roman", Times, serif;
 }
-
-body {
+html {
     margin: 0;
     padding: 0;
     background: #F7F7F7 url(/style/img/img01.jpg) repeat left top;
+}
+
+body >> html{
+    background: #F7F7F7 url(/style/img/img02.jpg) repeat-x left top;
     font-size: 14px;
     color: #5A554E;
 }

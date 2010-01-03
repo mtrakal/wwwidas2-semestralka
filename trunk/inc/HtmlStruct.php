@@ -18,7 +18,7 @@ class HtmlStruct {
      * vrátí konec headeru a zároveň začátek body
      */
     public static function Body() {
-        return "</head>\n<body>";
+        return "</head>\n<body onload=\"setfocus()\">\n";
     }
 
     /**
