@@ -11,16 +11,46 @@
  *
  */
 
+function detect($s)
+{
+    if (preg_match('#[\x80-\x{1FF}\x{2000}-\x{3FFF}]#u', $s))
+        return 'UTF-8';
+
+    if (preg_match('#[\x7F-\x9F\xBC]#', $s))
+        return 'WINDOWS-1250';
+
+    return 'ISO-8859-2';
+}
+
+
+function autoUTF($s)
+{
+    // detect UTF-8
+    if (preg_match('#[\x80-\x{1FF}\x{2000}-\x{3FFF}]#u', $s))
+        return $s;
+
+    // detect WINDOWS-1250
+    if (preg_match('#[\x7F-\x9F\xBC]#', $s))
+        return iconv('WINDOWS-1250', 'UTF-8', $s);
+
+    // assume ISO-8859-2
+    return iconv('ISO-8859-2', 'UTF-8', $s);
+}
+
 // check the parameter
 if(isset($_GET['part']) and $_GET['part'] != '') {
 // initialize the results array
     $results = array();
 
-    // search colors
     require_once dirname(__FILE__) . '/../../classes/Oci8.php';
     $db = new Oci8();
-    $pom = $db->Autocomplete($_GET['part']);
+    
+    $utf8 = autoUTF($_GET['part']);
+    //$utf8 = $_GET['part'];
+
+    $pom = $db->Autocomplete($utf8);
     unset ($db);
+    //var_dump($pom);
     foreach ($pom as $variable) {
     // if it starts with 'part' add to results
     //if( strpos($variable, 'amel') === 0 ) {
@@ -35,10 +65,7 @@ if(isset($_GET['part']) and $_GET['part'] != '') {
         echo $json->array_to_json($results);
     } else {
         // return the array as json with PHP 5.2
+        //var_dump($results);
         echo json_encode($results);
     }
-
-// or return using Zend_Json class
-//require_once('Zend/Json/Encoder.php');
-//echo Zend_Json_Encoder::encode($results);
 }

@@ -116,8 +116,9 @@ if($login->IsAuthorized()) {
                 </ul>
             </li>
                 <?php
-                if($login->IsAuthorized() && isset($_SESSION['role'])) {
-                    if($_SESSION['role'] == 'Administrator') {
+                //if($login->IsAuthorized() && isset($_SESSION['role'])) {
+                  //  if($_SESSION['role'] == 'Administrator') {
+                if($login->IsAuthorized('Administrator')) {
                 ?>
             <li>
                 <h2>Export</h2>
@@ -127,7 +128,7 @@ if($login->IsAuthorized()) {
                     </li>
                 </ul>
             </li>
-                    <?php }} ?>
+                    <?php } ?>
         </ul>
     </div>
     <?php } ?>

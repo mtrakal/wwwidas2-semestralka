@@ -17,9 +17,9 @@ if($login->IsAuthorized()) {
                                     <!--<div id="banner"><img src="/style/img/img07.jpg" alt="" /></div>-->
         <div class="post">
             <h2 class="title"><a href="#">Administrace</a></h2>
-            <p class="meta">Bude časem... možná x)</p>
+            <p class="meta">Bude časem&hellip; možná x)</p>
             <div class="entry">
-                <p>Nějaký kravinky...</p>
+                <p>Obsah budoucí administrace &hellip;</p>
                 <p class="csfdimdb">Odkaz na <a href="http://www.csfd.cz/film/29221-amelie-z-montmartru-fabuleux-destin-damelie-poulain-le/">čsfd</a>, <a href="http://www.csfd.cz/film/29221-amelie-z-montmartru-fabuleux-destin-damelie-poulain-le/">imdb</a>.</p>
                 <p class="links"><a href="#" class="edit">Upravit</a> <a href="#" class="borrow">Zapůjčit</a></p>
             </div>
@@ -32,6 +32,9 @@ if($login->IsAuthorized()) {
             <li>
                 <h2>Možnosti</h2>
                 <ul>
+                        <?php
+                        if($login->IsAuthorized('Administrator')) {
+                            ?>
                     <li><div>Uživatele</div>
                         <ul>
                             <li><a href="/inc/AddUser.php" class="iframe">Přidat</a></li>
@@ -67,18 +70,26 @@ if($login->IsAuthorized()) {
                             <li><a href="#" class="iframe" title="zatím nefunguje">Odstranit</a></li>
                         </ul>
                     </li>
+                            <?php
+                        }
+                        if($login->IsAuthorized('Borrower')) {
+                            ?>
+                    <li><div>Filmy</div>
+                        <ul>
+                            <li><a href="#" class="iframe" title="zatím nefunguje">Vypůjčit</a></li>
+                        </ul>
+                    </li>
+                            <?php
+                        }
+                        ?>
                 </ul>
             </li>
-            <!--
-					<li>
-						<h2>Veroeros sit dolore</h2>
-                                            <p><strong>Donec turpis orci</strong> facilisis et ornare eget, sagittis eu massa. Quisque dui diam, euismod et lobortis sed etiam lorem ipsum dolor etiam nullam et faucibus. <a href="#">More&#8230;</a></p>
-					</li>
-					-->
         </ul>
     </div>
         <?php
         include_once "./inc/Sfooter.php";
     }
-    else {echo "nic nebude!";}
-	?>
+    else {
+        echo "nic nebude!";
+    }
+    ?>

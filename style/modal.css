@@ -10,8 +10,6 @@
     margin: 0;
     padding: 0;
     font-size: 1em;
-    font-weight: normal;
-    font-style: normal;
     font-family: Georgia, "Times New Roman", Times, serif;
 }
 html, body {
@@ -98,4 +96,20 @@ select {
 }
 #modal #add_movie .texyla {
     text-align: left;
+}
+.texyla strong, .texyla b {
+    font-weight: bold;
+}
+.texyla ul {
+    padding-left: 5px;
+    list-style: disc;
+    list-style-position: inside;
+}
+.texyla ol {
+    padding-left: 5px;
+    list-style: decimal;
+    list-style-position: inside;
+}
+.texyla li {
+    padding-left: 3px;
 }

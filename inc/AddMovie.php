@@ -19,7 +19,7 @@
         <script type="text/javascript">
             //<![CDATA[
 
-            $(function() {
+            $(document).ready(function(){
                 $.texyla("setDefaults", {
                     // language: "en"
                 });
@@ -47,20 +47,20 @@
                     bottomLeftToolbar: ['edit', 'preview', 'htmlPreview'],
                     tabs: true,
                     texyCfg: "admin",
-                    width: 700
+                    width: 700,
+                    height: 200
                 });
 
                 $.texyla({
                     texyCfg: "admin",
                     buttonType: "span"
-
                 });
-            })(jQuery);
+            });
             //]]></script>
         <!-- TEXYLA_konec -->
         <script type="text/javascript">
             function setfocus() {
-                document.getElementsByName("titulky")[0].focus();
+                document.getElementsByName("original")[0].focus();
             }
         </script>
     </head>

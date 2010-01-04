@@ -539,3 +539,7 @@ strong {
     list-style: decimal;
     list-style-position: inside;
 }
+.external {
+    background: url('/style/external.gif') top right no-repeat;
+    padding: 0 12px 0 0;
+}

@@ -93,7 +93,7 @@ class Oci8 {
         $result = null;
         $row = array();
         if(dibi::isConnected()) {
-            $result= dibi::query("select film_id as IDFILMU, cz as CZ, en as EN, original as ORIGINAL, to_char(substr(popis,0,50)) as POPIS from ttitul where lower(ttitul.cz) like lower('%".$var."%') or lower(ttitul.en) like lower('%".$var."%') or lower(ttitul.original) like lower('%".$var."%')");
+            $result= dibi::query("select film_id as IDFILMU, cz as CZ, en as EN, original as ORIGINAL, to_char(substr(popis,0,50)) as POPIS from ttitul where lower(ttitul.cz) like lower('%".$var."%') or lower(ttitul.en) like lower('%".$var."%') or lower(ttitul.original) like lower('%".$var."%') or lower(ttitul.popis) like lower('%".$var."%')");
             $row = $result->fetchAll();
             return $row;
         }
