@@ -12,11 +12,11 @@ class Oci8 {
     public function __construct() {
         try {
             dibi::connect(array(
-                'driver'   => 'oracle',
-                'database' => 'sql101.upceucebny.cz:1521/oracle10',
-                'username' => 'st22312',
-                'password' => HESLO,
-                'charset' => 'UTF8'
+                    'driver'   => 'oracle',
+                    'database' => 'sql101.upceucebny.cz:1521/oracle10',
+                    'username' => 'st22312',
+                    'password' => HESLO,
+                    'charset' => 'UTF8'
             ));
         } catch (DibiException $e) {
             echo get_class($e), ': ', $e->getMessage(), "\n";
@@ -85,7 +85,7 @@ class Oci8 {
         }
     }
     /**
-     * Doplňování názvu filmů
+     * Doplňování názvu titulů filmů
      * @param <string> $var
      * @return <Array[][]> vícerozměrné pole
      */
@@ -99,15 +99,38 @@ class Oci8 {
         }
     }
     /**
+     * Doplňování názvu filmů - jednotlivých, které je možné půjčit
+     * @param <string> $var
+     * @return <Array[][]> vícerozměrné pole
+     */
+    public function AutocompleteCMovie($var) {
+        $result = null;
+        $row = array();
+        if(dibi::isConnected()) {
+            $result= dibi::query("select KATALOGOVE_CISLO as IDFILMU, cz as CZ, en as EN, original as ORIGINAL, to_char(substr(popis,0,50)) as POPIS from TFILMOTEKA left join TTITUL on TTITUL.FILM_ID = TFILMOTEKA.FILM_ID where lower(ttitul.cz) like lower('%".$var."%') or lower(ttitul.en) like lower('%".$var."%') or lower(ttitul.original) like lower('%".$var."%') or lower(ttitul.popis) like lower('%".$var."%')");
+            $row = $result->fetchAll();
+            return $row;
+        }
+    }
+    /**
      * Informace o filmu
      * @param <integer> $id
-     * @return <Array[][]> informace o vybraném filmu
+     * @return <Array[][]> informace o vybraném titulu
      */
     public function MovieGet($id) {
         $result = null;
         $row = array();
         if(dibi::isConnected()) {
-            $result= dibi::query("select film_id as IDFILMU, cz as CZ, en as EN, original as ORIGINAL, csfd as CSFD, imdb as IMDB, rok_vydani as ROK, delka as DELKA, popis as POPIS from ttitul where film_id=".$id);
+            $result= dibi::query("select TTITUL.film_id as IDFILMU, cz as CZ, en as EN, original as ORIGINAL, csfd as CSFD, imdb as IMDB, rok_vydani as ROK, delka as DELKA, popis as POPIS, ZANR as ZANR from ttitul left join TTITULZANR on TTITULZANR.FILM_ID = TTITUL.FILM_ID left join TZANR on TZANR.ZANR_ID = TTITULZANR.ZANR_ID where TTITUL.film_id=".$id);
+            $row = $result->fetchAll();
+            return $row;
+        }
+    }
+    public function GenreGetMovie($id) {
+        $result = null;
+        $row = array();
+        if(dibi::isConnected()) {
+            $result= dibi::query("select ZANR as ZANR from ttitul left join TTITULZANR on TTITULZANR.FILM_ID = TTITUL.FILM_ID left join TZANR on TZANR.ZANR_ID = TTITULZANR.ZANR_ID where TTITUL.film_id=".$id);
             $row = $result->fetchAll();
             return $row;
         }
@@ -221,6 +244,41 @@ class Oci8 {
             return true;
         } else {
             return false;
+        }
+    }
+    /**
+     * Informace o filmu
+     * @param <integer> $id
+     * @return <Array[][]> informace o vybraném filmu
+     */
+    public function CMovieGet($id) {
+        $result = null;
+        $row = array();
+        if(dibi::isConnected()) {
+            $result= dibi::query("select TFILMOTEKA.KATALOGOVE_CISLO as KATALOGOVE_CISLO, ORIGINAL as ORIGINAL, CZ as CZ, EN as EN, CSFD as CSFD, IMDB as IMDB, DELKA as DELKA, ROK_VYDANI as ROK, FILM_ID as FILM_ID, HODNOCENI as HODNOCENI, VELIKOST as VELIKOST, UMISTENI as UMISTENI, FORMAT as FORMAT, JAZYK as JAZYK, to_char(DATUM_PRIDANI,'yyyy-mm-dd hh.mm') as DATUM_PRIDANI, POPIS as POPIS, FILM_ID as FILM_ID
+from TFILMOTEKA
+left join TFORMAT_FILMU on TFILMOTEKA.FORMATFILMU_ID = TFORMAT_FILMU.FORMATFILMU_ID
+left join TTITUL on TTITUL.FILM_ID = TFILMOTEKA.FILM_ID
+left join TJAZYK_FILMU on TJAZYK_FILMU.KATALOGOVE_CISLO=TFILMOTEKA.KATALOGOVE_CISLO
+left join TJAZYK on TJAZYK_FILMU.JAZYK_ID = TJAZYK.JAZYK_ID
+where TFILMOTEKA.KATALOGOVE_CISLO=".$id);
+            $row = $result->fetchAll();
+            return $row;
+        }
+    }
+    public function CMovieGetByMovie($id) {
+        $result = null;
+        $row = array();
+        if(dibi::isConnected()) {
+            $result= dibi::query("select distinct TFILMOTEKA.KATALOGOVE_CISLO as KATALOGOVE_CISLO, UMISTENI as UMISTENI, FORMAT as FORMAT, JAZYK as JAZYK
+from TFILMOTEKA
+left join TFORMAT_FILMU on TFILMOTEKA.FORMATFILMU_ID = TFORMAT_FILMU.FORMATFILMU_ID
+left join TTITUL on TTITUL.FILM_ID = TFILMOTEKA.FILM_ID
+left join TJAZYK_FILMU on TJAZYK_FILMU.KATALOGOVE_CISLO=TFILMOTEKA.KATALOGOVE_CISLO
+left join TJAZYK on TJAZYK_FILMU.JAZYK_ID = TJAZYK.JAZYK_ID
+where TTITUL.FILM_ID=".$id);
+            $row = $result->fetchAll();
+            return $row;
         }
     }
 }

@@ -38,14 +38,14 @@ function autoUTF($s)
 }
 
 // check the parameter
-if(isset($_GET['part']) and $_GET['part'] != '') {
+if(isset($_GET['titul']) and $_GET['titul'] != '') {
 // initialize the results array
     $results = array();
 
     require_once dirname(__FILE__) . '/../../classes/Oci8.php';
     $db = new Oci8();
     
-    $utf8 = autoUTF($_GET['part']);
+    $utf8 = autoUTF($_GET['titul']);
     //$utf8 = $_GET['part'];
 
     $pom = $db->Autocomplete($utf8);
