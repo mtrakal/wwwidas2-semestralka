@@ -34,6 +34,15 @@ else {
 
         <script type="text/javascript">
             //<![CDATA[
+		$(document).ready(function() {
+			$('a').filter(function() {
+				return this.hostname && this.hostname !== location.hostname;
+			}).addClass('external')
+			.click(function() {
+				window.open(this.href);
+				return false;
+			});
+		});
 
             $(function () {
                 $.texyla("setDefaults", {
@@ -101,7 +110,7 @@ else {
                 });
             });
             $(document).ready(function(){$().bind('cbox_closed',function() 
-            {window.document.location.reload();});}) 
+                {window.document.location.reload();});})
         </script>
         <!-- COLORBOX_konec -->
     </head>

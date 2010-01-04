@@ -52,17 +52,22 @@ class Login {
     }
     /**
      * Zkontroluje, zda-li je uživatel přihlášen
+     * @param <string> $role
      * @return <boolean> uživatel přihlášen?
      */
-    public function IsAuthorized() {
-        if(isset($_SESSION['login'])) {
+    public function IsAuthorized($role = null) {
+        if(isset($_SESSION['login']) && empty ($role)) {
             if($_SESSION['login']) {
                 return true;
             } else {
                 return false;
             }
         }
-        else {
+        elseif(isset($_SESSION['login']) && isset($_SESSION['role'])) {
+            if($_SESSION['login'] && $_SESSION['role']==$role) {
+                return true;
+            }
+        } else {
             return false;
         }
     }
@@ -75,7 +80,7 @@ class Login {
             $_SESSION = array();
         }
         session_destroy();
-    //header("Location: /");
+        //header("Location: /");
     }
     public function getLogin() {
         return $this->login;
