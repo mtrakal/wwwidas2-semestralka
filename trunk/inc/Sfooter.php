@@ -12,6 +12,10 @@
                 <ul class="list">
                     <li><a href="http://blog.trtkal.net">Trtkalovo hlavní pískoviště, kde si plácá to svoje</a></li>
                     <li><a href="http://www.drevoteam.cz">Dřevoteam - truhlářství - mistrem svého oboru</a></li>
+                    <li><a href="http://bohemiaproducts.cz/cz/">Sklo z českých sklářských firem</a></li>
+                    <li><a href="http://papaboys.trtkal.net">Papa Boys - bigbeatová kapela</a></li>
+                    <li><a href="http://glass-beads.cz">Sklo a skleněné perle</a></li>
+                    <li><a href="http://nahravacistudio.com">Nahrávací studio</a></li>
                 </ul>
             </div>
         </div>
