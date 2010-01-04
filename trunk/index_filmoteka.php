@@ -6,6 +6,10 @@ session_start();
 //require_once dirname(__FILE__) . '/classes/Genre.php';
 //require_once dirname(__FILE__) . '/classes/Login.php';
 
+require_once dirname(__FILE__) . "/style/texyla/php/admin.cfg.php";
+//$adminTexy = new AdminTexy();
+$texy = new AdminTexy();
+
 if(isset($_GET['export'])) {
     if($_GET['export']=='xml') {
         include_once dirname(__FILE__) . '/classes/XMLParse.php';
@@ -49,7 +53,11 @@ if($login->IsAuthorized()) {
             <h2 class="title"><a href="#"><?php echo $result['0']['CZ']; ?></a></h2>
             <p class="meta"><?php echo $result['0']['ORIGINAL']; ?></p>
             <div class="entry">
-                <p><?php echo $result['0']['POPIS']; ?></p>
+                    <?php
+                    $text = get_magic_quotes_gpc() ? stripslashes($result['0']['POPIS']) : $result['0']['POPIS'];
+                    echo $texy->process($text);
+                    ?>
+                <!--<p><?php //echo $result['0']['POPIS']; ?></p>-->
                 <p class="csfdimdb">Odkaz na <a href="<?php echo $result['0']['CSFD']; ?>">čsfd</a>, <a href="<?php echo $result['0']['IMDB']; ?>">imdb</a>.</p>
                 <p class="links"><a href="#" class="edit">Upravit</a></p>
             </div>
@@ -85,106 +93,110 @@ if($login->IsAuthorized()) {
                 </ul>
             </li>
         </ul>
-        <?php } elseif (isset($_GET['cmovie'])) {
-        $result = array();
-        $film = new CMovie();
-        $result = $film->Get($_GET['cmovie']);
-        unset($film);
+            <?php } elseif (isset($_GET['cmovie'])) {
+            $result = array();
+            $film = new CMovie();
+            $result = $film->Get($_GET['cmovie']);
+            unset($film);
 
-        $zanr = array();
-        $genre = new Genre();
-        $zanr = $genre->GetByMovie($result['0']['FILM_ID']);
-        unset($genre);
-        ?>
-    <div id="content">
-            <!--<div id="banner"><img src="/style/img/img07.jpg" alt="" /></div>-->
-        <div class="post">
-            <h2 class="title"><a href="#"><?php echo $result['0']['CZ']; ?></a></h2>
-            <p class="meta"><?php echo $result['0']['ORIGINAL']; ?></p>
-            <div class="entry">
-                <p><?php echo $result['0']['POPIS']; ?></p>
-                <p class="csfdimdb">Odkaz na <a href="<?php echo $result['0']['CSFD']; ?>">čsfd</a>, <a href="<?php echo $result['0']['IMDB']; ?>">imdb</a>.</p>
-                <p class="links"><a href="#" class="edit">Upravit</a> <a href="#" class="borrow">Zapůjčit</a></p>
+            $zanr = array();
+            $genre = new Genre();
+            $zanr = $genre->GetByMovie($result['0']['FILM_ID']);
+            unset($genre);
+            ?>
+        <div id="content">
+                <!--<div id="banner"><img src="/style/img/img07.jpg" alt="" /></div>-->
+            <div class="post">
+                <h2 class="title"><a href="#"><?php echo $result['0']['CZ']; ?></a></h2>
+                <p class="meta"><?php echo $result['0']['ORIGINAL']; ?></p>
+                <div class="entry">
+                        <?php
+                        $text = get_magic_quotes_gpc() ? stripslashes($result['0']['POPIS']) : $result['0']['POPIS'];
+                        echo $texy->process($text);
+                        ?>
+                    <!--<p><?php //echo $result['0']['POPIS']; ?></p>-->
+                    <p class="csfdimdb">Odkaz na <a href="<?php echo $result['0']['CSFD']; ?>">čsfd</a>, <a href="<?php echo $result['0']['IMDB']; ?>">imdb</a>.</p>
+                    <p class="links"><a href="#" class="edit">Upravit</a> <a href="#" class="borrow">Zapůjčit</a></p>
+                </div>
             </div>
-        </div>
-        <div class="cleaner both">&nbsp;</div>
-    </div><!-- end #content -->
-    <div id="sidebar">
-        <ul>
-            <li>
-                <h2>Parametry filmu</h2>
-                <ul>
-                    <li><div>Originální název</div><a href="/titul/<?php echo $result['0']['FILM_ID']; ?>.html"><?php echo $result['0']['ORIGINAL']; ?></a></li>
-                    <li><div>Anglický název</div><?php echo $result['0']['EN']; ?></li>
-                    <li><div>Český název</div><?php echo $result['0']['CZ']; ?></li>
-                    <li><div>Délka a datum vydání</div><?php echo $result['0']['DELKA']; ?> minut, <?php echo $result['0']['ROK']; ?></li>
-                    <li><div>Žánr</div>
-                            <?php
-                            foreach ($zanr as $row) {
-                                echo $row['ZANR'].", ";
-                            }
-                            ?>
-                    </li>
-                    <li><div>Jazyk</div><?php echo $result['0']['JAZYK']; ?></li>
-                    <li><div>Formát a velikost</div><?php echo $result['0']['FORMAT'].", ".$result['0']['VELIKOST']." kiB"; ?></li>
-                    <li><div>Hodnocení</div><?php for($i=0; $result['0']['HODNOCENI']>$i;$i++) { ?><img src="/style/img/str.gif" alt="*" /><?php } ?></li>
-                    <li><div>Umístění</div><?php echo $result['0']['UMISTENI']; ?></li>
-                    <li><div>Datum přidání</div><?php echo $result['0']['DATUM_PRIDANI']; ?></li>
+            <div class="cleaner both">&nbsp;</div>
+        </div><!-- end #content -->
+        <div id="sidebar">
+            <ul>
+                <li>
+                    <h2>Parametry filmu</h2>
+                    <ul>
+                        <li><div>Originální název</div><a href="/titul/<?php echo $result['0']['FILM_ID']; ?>.html"><?php echo $result['0']['ORIGINAL']; ?></a></li>
+                        <li><div>Anglický název</div><?php echo $result['0']['EN']; ?></li>
+                        <li><div>Český název</div><?php echo $result['0']['CZ']; ?></li>
+                        <li><div>Délka a datum vydání</div><?php echo $result['0']['DELKA']; ?> minut, <?php echo $result['0']['ROK']; ?></li>
+                        <li><div>Žánr</div>
+                                <?php
+                                foreach ($zanr as $row) {
+                                    echo $row['ZANR'].", ";
+                                }
+                                ?>
+                        </li>
+                        <li><div>Jazyk</div><?php echo $result['0']['JAZYK']; ?></li>
+                        <li><div>Formát a velikost</div><?php echo $result['0']['FORMAT'].", ".$result['0']['VELIKOST']." kiB"; ?></li>
+                        <li><div>Hodnocení</div><?php for($i=0; $result['0']['HODNOCENI']>$i;$i++) { ?><img src="/style/img/str.gif" alt="*" /><?php } ?></li>
+                        <li><div>Umístění</div><?php echo $result['0']['UMISTENI']; ?></li>
+                        <li><div>Datum přidání</div><?php echo $result['0']['DATUM_PRIDANI']; ?></li>
 
-                </ul>
-            </li>
-        </ul>
-        <?php } else { ?>
-    <div id="content">
-        <div class="post">
-            <h2 class="title"><a href="#">Výsledky vyhledávání</a></h2>
-            <div class="entry">
-            </div>
-        </div>
-        <div class="cleaner both">&nbsp;</div>
-    </div><!-- end #content -->
-    <div id="sidebar">
-        <script type="text/javascript">
-            $(function(){
-                setAutoComplete("searchFieldTitul", "results", "/style/autocomplete/autocomplete.php?titul=");
-            });
-        </script>
-        <script type="text/javascript">
-            function setfocus() {
-                document.getElementsByName("searchFieldTitul")[0].focus();
-            }
-        </script>
-        <ul>
-            <li>
-                <h2>Vyhledávání</h2>
-                <ul>
-                    <li id="search">
-                        <form method="post" action="#">
-                            <p><label for="searchFieldTitul">Titul: </label>
-                                <input id="searchFieldTitul" name="searchFieldTitul" type="text" />
-                            </p>
-                                <!--<input type="submit" value="Odeslat" />-->
-                        </form>
-                    </li>
-                </ul>
-            </li>
-                <?php
-                //if($login->IsAuthorized() && isset($_SESSION['role'])) {
-                //  if($_SESSION['role'] == 'Administrator') {
-                if($login->IsAuthorized('Administrator')) {
-                    ?>
-            <li>
-                <h2>Export</h2>
+                    </ul>
+                </li>
+            </ul>
+                <?php } else { ?>
+            <div id="content">
+                <div class="post">
+                    <h2 class="title"><a href="#">Výsledky vyhledávání</a></h2>
+                    <div class="entry">
+                    </div>
+                </div>
+                <div class="cleaner both">&nbsp;</div>
+            </div><!-- end #content -->
+            <div id="sidebar">
+                <script type="text/javascript">
+                    $(function(){
+                        setAutoComplete("searchFieldTitul", "results", "/style/autocomplete/autocomplete.php?titul=");
+                    });
+                </script>
+                <script type="text/javascript">
+                    function setfocus() {
+                        document.getElementsByName("searchFieldTitul")[0].focus();
+                    }
+                </script>
                 <ul>
                     <li>
-                        <a href="?export=xml">Do xml souboru</a>
+                        <h2>Vyhledávání</h2>
+                        <ul>
+                            <li id="search">
+                                <form method="post" action="#">
+                                    <p><label for="searchFieldTitul">Titul: </label>
+                                        <input id="searchFieldTitul" name="searchFieldTitul" type="text" />
+                                    </p>
+                                        <!--<input type="submit" value="Odeslat" />-->
+                                </form>
+                            </li>
+                        </ul>
                     </li>
+                        <?php
+                        //if($login->IsAuthorized() && isset($_SESSION['role'])) {
+                        //  if($_SESSION['role'] == 'Administrator') {
+                        if($login->IsAuthorized('Administrator')) {
+                            ?>
+                    <li>
+                        <h2>Export</h2>
+                        <ul>
+                            <li>
+                                <a href="?export=xml">Do xml souboru</a>
+                            </li>
+                        </ul>
+                    </li>
+                            <?php } ?>
                 </ul>
-            </li>
                     <?php } ?>
-        </ul>
-            <?php } ?>
-    </div>
-    <?php
-    include_once "./inc/Sfooter.php";
-    ?>
+            </div>
+            <?php
+            include_once "./inc/Sfooter.php";
+            ?>

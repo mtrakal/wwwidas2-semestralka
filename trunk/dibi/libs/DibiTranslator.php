@@ -4,14 +4,7 @@
  * dibi - tiny'n'smart database abstraction layer
  * ----------------------------------------------
  *
- * Copyright (c) 2005, 2009 David Grudl (http://davidgrudl.com)
- *
- * This source file is subject to the "dibi license" that is bundled
- * with this package in the file license.txt.
- *
- * For more information please see http://dibiphp.com
- *
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @license    http://dibiphp.com/license  dibi license
  * @link       http://dibiphp.com
  * @package    dibi
@@ -22,8 +15,7 @@
 /**
  * dibi SQL translator.
  *
- * @author     David Grudl
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @package    dibi
  */
 final class DibiTranslator extends DibiObject
@@ -326,10 +318,7 @@ final class DibiTranslator extends DibiObject
 
 		// with modifier procession
 		if ($modifier) {
-			if ($value instanceof IDibiVariable) {
-				return $value->toSql($this, $modifier);
-
-			} elseif ($value !== NULL && !is_scalar($value) && !($value instanceof DateTime)) {  // array is already processed
+			if ($value !== NULL && !is_scalar($value) && !($value instanceof DateTime)) {  // array is already processed
 				$this->hasError = TRUE;
 				return '**Unexpected type ' . gettype($value) . '**';
 			}
@@ -373,7 +362,7 @@ final class DibiTranslator extends DibiObject
 						$value = (int) $value; // timestamp
 
 					} elseif (is_string($value)) {
-						$value = class_exists('DateTime', FALSE) ? new DateTime($value) : strtotime($value);
+						$value = new DateTime($value);
 					}
 					return $this->driver->escape($value, $modifier);
 				}
@@ -417,26 +406,25 @@ final class DibiTranslator extends DibiObject
 
 
 		// without modifier procession
-		if (is_string($value))
+		if (is_string($value)) {
 			return $this->driver->escape($value, dibi::TEXT);
 
-		if (is_int($value) || is_float($value))
+		} elseif (is_int($value) || is_float($value)) {
 			return rtrim(rtrim(number_format($value, 5, '.', ''), '0'), '.');
 
-		if (is_bool($value))
+		} elseif (is_bool($value)) {
 			return $this->driver->escape($value, dibi::BOOL);
 
-		if ($value === NULL)
+		} elseif ($value === NULL) {
 			return 'NULL';
 
-		if ($value instanceof IDibiVariable)
-			return $value->toSql($this, NULL);
-
-		if ($value instanceof DateTime)
+		} elseif ($value instanceof DateTime) {
 			return $this->driver->escape($value, dibi::DATETIME);
 
-		$this->hasError = TRUE;
-		return '**Unexpected ' . gettype($value) . '**';
+		} else {
+			$this->hasError = TRUE;
+			return '**Unexpected ' . gettype($value) . '**';
+		}
 	}
 
 

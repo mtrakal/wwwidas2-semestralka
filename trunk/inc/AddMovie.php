@@ -68,14 +68,14 @@
         <div id="modal">
             <h1>Přidání titulu</h1>
             <?php
-/*
+            /*
             if(isset($_POST['popis'])) {
                 require dirname(__FILE__) . "/../style/texyla/php/texyla.php";
                 $texyla = TexylaTools::getTexy('admin');
                 $text = get_magic_quotes_gpc() ? stripslashes($_POST["popis"]) : $_POST["popis"];
                 $html = $texyla->process($text);
             }
-*/
+            */
             if(isset($_POST['original'])) {
                 include_once dirname(__FILE__) . '/../classes/Movie.php';
                 $movie = new Movie();
@@ -87,15 +87,17 @@
             } else {
                 ?>
             <form id="add_movie" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
-                <p>
+                <p style="float: left; width: 250px;">
                     <label class="req">Originální název:</label><input type="text" name="original" /><br />
                     <label>Český název:</label><input type="text" name="cz" /><br />
                     <label>Anglický název:</label><input type="text" name="en" /><br />
                     <label title="Odkaz na čsfd.cz">CSFD:</label><input type="text" name="csfd" /><br />
+                </p>
+                <p>
                     <label title="Odkaz na imdb">IMDB:</label><input type="text" name="imdb" /><br />
                     <label class="req" title="Rok vydání">Rok:</label><input type="text" name="rok" /><br />
                     <label class="req">Délka:</label><input type="text" name="delka" /><br />
-                    <label class="req" title="Popis filmu">Popis:</label><textarea name="popis" rows="20" cols="90" id="popis"></textarea>
+                    <label class="req" title="Popis filmu">Popis:</label><textarea name="popis" rows="16" cols="90" id="popis"></textarea>
                 </p>
                 <!--<div class="center"><input type="submit" value="Přidat" /></div>-->
             </form>
