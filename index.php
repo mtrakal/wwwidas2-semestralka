@@ -1,18 +1,19 @@
 <?php
-require_once dirname(__FILE__) . '/classes/Login.php';
+require_once dirname(__FILE__) . "/fautoload.php";
+$login = new Login();
+
 require_once dirname(__FILE__) . "/inc/Sheader.php";
 ?>
 <li class="current_page_item"><a href="/index.php">Hlavní stránka</a></li>
 <li><a href="/index_filmoteka.php">Seznam filmů</a></li>
 <?php
-	$login = new Login();
-	if($login->IsAuthorized()) {
-            echo '<li><a href="/index_administrace.php">Administrace</a></li>'."\n".
-                '<li><a href="/inc/Login.php?action=logout">Odhlášení</a></li>';
-	} else {
-		echo '<li><a href="/inc/Login.php" class="iframe">Administrace</a></li>';
-	}
-	?>
+if($login->IsAuthorized()) {
+    echo '<li><a href="/index_administrace.php">Administrace</a></li>'."\n".
+            '<li><a href="/inc/Login.php?action=logout">Odhlášení</a></li>';
+} else {
+    echo '<li><a href="/inc/Login.php" class="iframe">Administrace</a></li>';
+}
+?>
 </ul>
 </div>
 <!-- end #menu -->
@@ -26,10 +27,10 @@ require_once dirname(__FILE__) . "/inc/Sheader.php";
                 <ul>
                     <li><strong>Popis</strong>
                         <ul>
-                            <li>Správa osobní filmotéky s malou půjčovnou</li>
-                            <li>Hodnocení filmů pouze správcem</li>
-                            <li>Možnost stahování titulků</li>
-                            <li>Zobrazení žánru, délky, ... filmu</li>
+                            <li>Správa osobní filmotéky</li>
+                            <li>Možnost přidávání uživatelů, žánrů, filmů, &hellip;</li>
+                            <li>Prohlížení titulů filmů a následně jednotlivých filmů</li>
+                            <li>Zobrazení žánru, délky, &hellip; filmu</li>
                         </ul>
                     </li>
                     <li><strong>Uživatelské role</strong>
@@ -82,6 +83,6 @@ require_once dirname(__FILE__) . "/inc/Sheader.php";
             </li>
         </ul>
     </div>
-<?php
-	require_once "./inc/Sfooter.php";
-?>
+    <?php
+    require_once "./inc/Sfooter.php";
+    ?>
