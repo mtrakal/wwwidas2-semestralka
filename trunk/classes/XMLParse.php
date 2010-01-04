@@ -17,7 +17,7 @@ class XMLParse {
         header("Content-type: text/xml");
         header("Content-Transfer-Encoding: binary");
 
-        echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+        echo '<?xml version="1.0" encoding="UTF-8"?>'."\n<tituly>";
 
         $result = array();
         $db = new Oci8();
@@ -27,6 +27,7 @@ class XMLParse {
             echo $variable['XML']."\n";
         };
         unset($result, $db);
+        echo '</tituly>';
     }
 /*
 <!--
