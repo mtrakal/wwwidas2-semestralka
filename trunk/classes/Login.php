@@ -1,7 +1,7 @@
 <?php
-session_start();
-
-require_once dirname(__FILE__) . '/../classes/Oci8.php';
+if(!isset($_SESSION)) { session_start(); }
+//require_once dirname(__FILE__) . '/../classes/Oci8.php';
+require_once dirname(__FILE__) . "/../fautoload.php";
 
 /**
  * Description of Login
@@ -55,7 +55,7 @@ class Login {
      * @param <string> $role
      * @return <boolean> uživatel přihlášen?
      */
-    public function IsAuthorized($role = null) {
+    public static function IsAuthorized($role = null) {
         if(isset($_SESSION['login']) && empty ($role)) {
             if($_SESSION['login']) {
                 return true;

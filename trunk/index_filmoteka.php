@@ -1,8 +1,10 @@
 <?php
-require_once dirname(__FILE__) . '/classes/Movie.php';
-require_once dirname(__FILE__) . '/classes/CMovie.php';
-require_once dirname(__FILE__) . '/classes/Genre.php';
-require_once dirname(__FILE__) . '/classes/Login.php';
+require_once dirname(__FILE__) . "/fautoload.php";
+session_start();
+//require_once dirname(__FILE__) . '/classes/Movie.php';
+//require_once dirname(__FILE__) . '/classes/CMovie.php';
+//require_once dirname(__FILE__) . '/classes/Genre.php';
+//require_once dirname(__FILE__) . '/classes/Login.php';
 
 if(isset($_GET['export'])) {
     if($_GET['export']=='xml') {
@@ -12,7 +14,6 @@ if(isset($_GET['export'])) {
         die();
     }
 }
-
 
 include_once "./inc/Sheader.php";
 ?>
@@ -28,7 +29,6 @@ if($login->IsAuthorized()) {
 }
 ?>
 </ul>
-
 </div>
 <!-- end #menu -->
 <div id="page">
@@ -121,7 +121,6 @@ if($login->IsAuthorized()) {
                     <li><div>Anglický název</div><?php echo $result['0']['EN']; ?></li>
                     <li><div>Český název</div><?php echo $result['0']['CZ']; ?></li>
                     <li><div>Délka a datum vydání</div><?php echo $result['0']['DELKA']; ?> minut, <?php echo $result['0']['ROK']; ?></li>
-                    <li><div>Jazyk</div><?php echo $result['0']['JAZYK']; ?></li>
                     <li><div>Žánr</div>
                             <?php
                             foreach ($zanr as $row) {
@@ -129,6 +128,7 @@ if($login->IsAuthorized()) {
                             }
                             ?>
                     </li>
+                    <li><div>Jazyk</div><?php echo $result['0']['JAZYK']; ?></li>
                     <li><div>Formát a velikost</div><?php echo $result['0']['FORMAT'].", ".$result['0']['VELIKOST']." kiB"; ?></li>
                     <li><div>Hodnocení</div><?php for($i=0; $result['0']['HODNOCENI']>$i;$i++) { ?><img src="/style/img/str.gif" alt="*" /><?php } ?></li>
                     <li><div>Umístění</div><?php echo $result['0']['UMISTENI']; ?></li>
@@ -187,10 +187,10 @@ if($login->IsAuthorized()) {
                     </li>
                 </ul>
             </li>
-                    <?php } ?>
         </ul>
     </div>
-        <?php } ?>
-    <?php
-    include_once "./inc/Sfooter.php";
-    ?>
+            <?php
+        }
+    }
+include_once "./inc/Sfooter.php";
+?>

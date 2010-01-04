@@ -1,5 +1,6 @@
 <?php
-require_once dirname(__FILE__) . '/classes/Login.php';
+require_once dirname(__FILE__) . "/fautoload.php";
+//require_once dirname(__FILE__) . '/classes/Login.php';
 $login = new Login();
 if($login->IsAuthorized()) {
 
