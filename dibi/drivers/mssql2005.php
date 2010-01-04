@@ -4,14 +4,7 @@
  * dibi - tiny'n'smart database abstraction layer
  * ----------------------------------------------
  *
- * Copyright (c) 2005, 2009 David Grudl (http://davidgrudl.com)
- *
- * This source file is subject to the "dibi license" that is bundled
- * with this package in the file license.txt.
- *
- * For more information please see http://dibiphp.com
- *
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @license    http://dibiphp.com/license  dibi license
  * @link       http://dibiphp.com
  * @package    dibi
@@ -28,8 +21,7 @@
  *   - 'charset' - character encoding to set (default is UTF-8)
  *   - 'resource' - connection resource (optional)
  *
- * @author     David Grudl
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @package    dibi
  */
 class DibiMsSql2005Driver extends DibiObject implements IDibiDriver
@@ -39,9 +31,6 @@ class DibiMsSql2005Driver extends DibiObject implements IDibiDriver
 
 	/** @var resource  Resultset resource */
 	private $resultSet;
-
-	/** @var string  character encoding */
-	private $charset;
 
 
 
@@ -66,8 +55,10 @@ class DibiMsSql2005Driver extends DibiObject implements IDibiDriver
 	{
 		if (isset($config['resource'])) {
 			$this->connection = $config['resource'];
+
 		} elseif (isset($config['options'])) {
-			$this->connection = sqlsrv_connect($config['host'], $config['options']);
+			$this->connection = sqlsrv_connect($config['host'], (array) $config['options']);
+
 		} else {
 			$this->connection = sqlsrv_connect($config['host']);
 		}
@@ -76,8 +67,6 @@ class DibiMsSql2005Driver extends DibiObject implements IDibiDriver
 			$info = sqlsrv_errors();
 			throw new DibiDriverException($info[0]['message'], $info[0]['code']);
 		}
-
-		$this->charset = empty($config['charset']) ? 'UTF-8' : $config['charset'];
 	}
 
 
@@ -101,7 +90,6 @@ class DibiMsSql2005Driver extends DibiObject implements IDibiDriver
 	 */
 	public function query($sql)
 	{
-		$sql = iconv($this->charset, 'UTF-16LE', $sql);
 		$this->resultSet = sqlsrv_query($this->connection, $sql);
 
 		if ($this->resultSet === FALSE) {
@@ -291,13 +279,7 @@ class DibiMsSql2005Driver extends DibiObject implements IDibiDriver
 	 */
 	public function fetch($assoc)
 	{
-		$row = sqlsrv_fetch_array($this->resultSet, $assoc ? SQLSRV_FETCH_ASSOC : SQLSRV_FETCH_NUMERIC);
-		foreach ($row as $k => $v) {
-			if (is_string($v)) {
-				$row[$k] = iconv('UTF-16LE', $this->charset, $v);
-			}
-		}
-		return $row;
+		return sqlsrv_fetch_array($this->resultSet, $assoc ? SQLSRV_FETCH_ASSOC : SQLSRV_FETCH_NUMERIC);
 	}
 
 

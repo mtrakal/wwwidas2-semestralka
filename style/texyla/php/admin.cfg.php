@@ -10,7 +10,7 @@ class AdminTexy extends Texy {
 		parent::__construct();
 
 		// výstup
-		$this->setOutputMode(self::HTML4_TRANSITIONAL);
+		$this->setOutputMode(self::XHTML1_STRICT);
 		$this->htmlOutputModule->removeOptional = false;
 		// odstranění zprávy <!-- by Texy2! -->
 		self::$advertisingNotice = false;

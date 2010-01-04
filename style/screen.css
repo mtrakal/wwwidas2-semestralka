@@ -25,7 +25,7 @@ html {
     padding: 0;
 }
 body {
-    background: #F7F7F7 url(/style/img/img01.jpg) repeat left top;
+    background: #F7F7F7 url('/style/img/img01.jpg') repeat left top;
     font-size: 14px;
     color: #5A554E;
 }
@@ -78,7 +78,7 @@ h2 a {
 #wrapper {
     margin: 0px;
     padding: 0px;
-    background: url(/style/img/img02.jpg) repeat-x left top;
+    background: url('/style/img/img02.jpg') repeat-x left top;
 }
 
 /* Header */
@@ -88,7 +88,7 @@ h2 a {
     height: 235px;
     margin: 0 auto;
     padding: 0px;
-    background: url(/style/img/img03.jpg) no-repeat left top;
+    background: url('/style/img/img03.jpg') no-repeat left top;
 }
 
 /* Logo */
@@ -176,7 +176,7 @@ h2 a {
     height: 65px;
     margin: 0 auto;
     padding: 0;
-    background: url(/style/img/img04.jpg) no-repeat left top;
+    background: url('/style/img/img04.jpg') no-repeat left top;
 }
 
 #menu ul {
@@ -204,7 +204,7 @@ h2 a {
     display: block;
     margin-left: 10px;
     padding: 15px 10px;
-    background: url(/style/img/img05.jpg) repeat-x left top;
+    background: url('/style/img/img05.jpg') repeat-x left top;
     text-decoration: none;
     font-size: 18px;
     color: #FFFFFF;
@@ -215,7 +215,7 @@ h2 a {
 }
 
 #menu .current_page_item a {
-    background: url(/style/img/img06.png) repeat-x left top;
+    background: url('/style/img/img06.png') repeat-x left top;
     color: #493E2B;
 }
 
@@ -297,35 +297,34 @@ strong {
 }
 
 .post .entry {
-    background: url(/style/img/img08.jpg) no-repeat left top;
+    background: url('/style/img/img08.jpg') no-repeat left top;
     padding: 25px 0px 0px 0px;
     text-align: justify;
 }
 
 .links {
-    padding-top: 10px;
 }
 .csfdimdb {
-    padding-top: 10px;
     text-align: right;
 }
 
 .edit {
     padding-left: 16px;
-    background: url(/style/img/img11.gif) no-repeat left 4px;
-    text-decoration: underline;
-    font-size: 12px;
-    font-weight: normal;
-    float: left;
-}
-
-.borrow {
-    padding-left: 18px;
-    background: url(/style/img/img10.gif) no-repeat left 3px;
+    background: url('/style/img/img11.gif') no-repeat left 4px;
     text-decoration: underline;
     font-size: 12px;
     font-weight: normal;
     float: right;
+}
+
+.borrow {
+    margin-right: 10px;
+    padding-left: 18px;
+    background: url('/style/img/img10.gif') no-repeat left 3px;
+    text-decoration: underline;
+    font-size: 12px;
+    font-weight: normal;
+    float: left;
 }
 
 
@@ -369,7 +368,7 @@ strong {
     height: 19px;
     margin-right: 16px;
     padding: 4px 12px;
-    background: #3D2A0B url(/style/img/img12.jpg) repeat-x left top;
+    background: #3D2A0B url('/style/img/img12.jpg') repeat-x left top;
     font-size: 12px;
     color: #FFFFFF;
 }
@@ -387,7 +386,7 @@ strong {
 #sidebar h2 {
     margin-top: 8px;
     height: 65px;
-    background: url(/style/img/img09.jpg) no-repeat left bottom;
+    background: url('/style/img/img09.jpg') no-repeat left bottom;
     letter-spacing: -.5px;
     font-size: 28px;
     color: #493E2B;
@@ -438,7 +437,7 @@ strong {
     height: 255px;
     margin: 0 auto;
     padding: 60px 50px 0px 50px;
-    background: url(/style/img/img15.jpg) no-repeat left top;
+    background: url('/style/img/img15.jpg') no-repeat left top;
     font-size: 12px;
     color: #887450;
 }
@@ -504,14 +503,20 @@ strong {
 
 .cleaner.both {
     clear: both;
+    font-size: 1px;
+    visibility: hidden;
 }
 
 .cleaner.left {
     clear: left;
+    font-size: 1px;
+    visibility: hidden;
 }
 
 .cleaner.right {
     clear: right;
+    font-size: 1px;
+    visibility: hidden;
 }
 
 #login {

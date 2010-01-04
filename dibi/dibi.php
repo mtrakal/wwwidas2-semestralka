@@ -4,14 +4,14 @@
  * dibi - tiny'n'smart database abstraction layer
  * ----------------------------------------------
  *
- * Copyright (c) 2005, 2009 David Grudl (http://davidgrudl.com)
+ * Copyright (c) 2005, 2010 David Grudl (http://davidgrudl.com)
  *
  * This source file is subject to the "dibi license" that is bundled
- * with this package in the file license.txt.
+ * with this package in the file license.txt, and/or GPL license.
  *
  * For more information please see http://dibiphp.com
  *
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @license    http://dibiphp.com/license  dibi license
  * @link       http://dibiphp.com
  * @package    dibi
@@ -21,8 +21,8 @@
 /**
  * Check PHP configuration.
  */
-if (version_compare(PHP_VERSION, '5.1.0', '<')) {
-	throw new Exception('dibi needs PHP 5.1.0 or newer.');
+if (version_compare(PHP_VERSION, '5.2.0', '<')) {
+	throw new Exception('dibi needs PHP 5.2.0 or newer.');
 }
 
 @set_magic_quotes_runtime(FALSE); // intentionally @
@@ -60,6 +60,21 @@ if (!interface_exists(/*Nette\*/'IDebuggable', FALSE)) {
 	require_once dirname(__FILE__) . '/Nette/IDebuggable.php';
 }
 
+
+
+/**
+ * Back-compatibility
+ */
+class DibiVariable extends DateTime
+{
+	function __construct($val)
+	{
+		parent::__construct($val);
+	}
+}
+
+
+
 // dibi libraries
 require_once dirname(__FILE__) . '/libs/interfaces.php';
 require_once dirname(__FILE__) . '/libs/DibiObject.php';
@@ -69,7 +84,6 @@ require_once dirname(__FILE__) . '/libs/DibiResult.php';
 require_once dirname(__FILE__) . '/libs/DibiResultIterator.php';
 require_once dirname(__FILE__) . '/libs/DibiRow.php';
 require_once dirname(__FILE__) . '/libs/DibiTranslator.php';
-require_once dirname(__FILE__) . '/libs/DibiVariable.php';
 require_once dirname(__FILE__) . '/libs/DibiDataSource.php';
 require_once dirname(__FILE__) . '/libs/DibiFluent.php';
 require_once dirname(__FILE__) . '/libs/DibiDatabaseInfo.php';
@@ -85,8 +99,7 @@ require_once dirname(__FILE__) . '/libs/DibiProfiler.php';
  * This class is static container class for creating DB objects and
  * store connections info.
  *
- * @author     David Grudl
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @package    dibi
  */
 class dibi
@@ -121,8 +134,8 @@ class dibi
 	/**#@+
 	 * dibi version
 	 */
-	const VERSION = '1.2';
-	const REVISION = '3b2ca19 released on 2009-09-18';
+	const VERSION = '1.3-dev';
+	const REVISION = 'c374758 released on 2010-01-03';
 	/**#@-*/
 
 	/**#@+
@@ -570,36 +583,21 @@ class dibi
 
 
 	/**
-	 * Pseudotype for timestamp representation.
-	 * @param  mixed  datetime
-	 * @return DibiVariable
+	 * @deprecated
 	 */
 	public static function datetime($time = NULL)
 	{
-		if ($time === NULL) {
-			$time = time(); // current time
-
-		} elseif (is_numeric($time)) {
-			$time = (int) $time; // timestamp
-
-		} elseif (is_string($time)) {
-			$time = class_exists('DateTime', FALSE) ? new DateTime($time) : strtotime($time); // DateTime is since PHP 5.2
-		}
-		return new DibiVariable($time, dibi::DATETIME);
+		return new DateTime(is_numeric($time) ? date('Y-m-d H:i:s', $time) : $time);
 	}
 
 
 
 	/**
-	 * Pseudotype for date representation.
-	 * @param  mixed  date
-	 * @return DibiVariable
+	 * @deprecated
 	 */
 	public static function date($date = NULL)
 	{
-		$var = self::datetime($date);
-		$var->modifier = dibi::DATE;
-		return $var;
+		return new DateTime(is_numeric($date) ? date('Y-m-d', $date) : $date);
 	}
 
 
