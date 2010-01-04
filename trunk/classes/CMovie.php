@@ -15,5 +15,15 @@ class CMovie {
     public function Delete() {
         ;
     }
+    public function GetByTitul($id) {
+        $db = new Oci8();
+        return $db->CMovieGetByMovie($id);
+        unset ($db);
+    }
+    public function Get($id) {
+        $db = new Oci8();
+        return $db->CMovieGet($id);
+        unset ($db);
+    }
 }
 ?>

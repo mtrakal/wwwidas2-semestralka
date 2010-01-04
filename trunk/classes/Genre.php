@@ -28,5 +28,10 @@ class Genre {
     public function Delete() {
         ;
     }
+    public function GetByMovie($id) {
+        $db = new Oci8();
+        return $db->GenreGetMovie($id);
+        unset ($db);
+    }
 }
 ?>
