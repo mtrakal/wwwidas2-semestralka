@@ -29,8 +29,7 @@ if($login->IsAuthorized()) {
 }
 ?>
 </ul>
-</div>
-<!-- end #menu -->
+</div><!-- end #menu -->
 <div id="page">
     <?php
     if (isset($_GET['movie'])) {
@@ -56,8 +55,7 @@ if($login->IsAuthorized()) {
             </div>
         </div>
         <div class="cleaner both">&nbsp;</div>
-    </div>
-    <!-- end #content -->
+    </div><!-- end #content -->
     <div id="sidebar">
         <ul>
             <li>
@@ -110,8 +108,7 @@ if($login->IsAuthorized()) {
             </div>
         </div>
         <div class="cleaner both">&nbsp;</div>
-    </div>
-    <!-- end #content -->
+    </div><!-- end #content -->
     <div id="sidebar">
         <ul>
             <li>
@@ -143,12 +140,10 @@ if($login->IsAuthorized()) {
         <div class="post">
             <h2 class="title"><a href="#">Výsledky vyhledávání</a></h2>
             <div class="entry">
-
             </div>
         </div>
         <div class="cleaner both">&nbsp;</div>
-    </div>
-    <!-- end #content -->
+    </div><!-- end #content -->
     <div id="sidebar">
         <script type="text/javascript">
             $(function(){
@@ -187,10 +182,10 @@ if($login->IsAuthorized()) {
                     </li>
                 </ul>
             </li>
+                    <?php } ?>
         </ul>
+            <?php } ?>
     </div>
-            <?php
-        }
-    }
-include_once "./inc/Sfooter.php";
-?>
+    <?php
+    include_once "./inc/Sfooter.php";
+    ?>
