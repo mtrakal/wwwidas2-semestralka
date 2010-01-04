@@ -13,9 +13,9 @@
     padding: 3px 3px 8px 3px;
 }
 #results .selected {
-    background-color: #ffd4a8;
     color: #000;
     font-weight: bold;
+	 background-color: #d9e4f0;
 }
 #results .unselected {
     background-color: #fff;
