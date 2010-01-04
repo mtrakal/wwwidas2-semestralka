@@ -71,20 +71,20 @@ if($login->IsAuthorized()) {
                                 echo $row['ZANR'].", ";
                             }
                             ?>
+                    </li>
                     <li><div>Dostupné filmy:</div><?php
                             $result = array();
                             $film = new CMovie();
                             $result = $film->GetByTitul($_GET['movie']);
                             unset($film);
                             foreach ($result as $row) {
-                                echo "<a href=\"/film/".$row['KATALOGOVE_CISLO'].".html\">".$row['FORMAT'].", ".$row['JAZYK'].", ".$row['UMISTENI']."</a><br>\n";
+                                echo "<a href=\"/film/".$row['KATALOGOVE_CISLO'].".html\">".$row['FORMAT'].", ".$row['JAZYK'].", ".$row['UMISTENI']."</a><br />\n";
                             }
                             ?>
                     </li>
                 </ul>
             </li>
         </ul>
-    </div>
         <?php } elseif (isset($_GET['cmovie'])) {
         $result = array();
         $film = new CMovie();
@@ -134,7 +134,6 @@ if($login->IsAuthorized()) {
                 </ul>
             </li>
         </ul>
-    </div>
         <?php } else { ?>
     <div id="content">
         <div class="post">
