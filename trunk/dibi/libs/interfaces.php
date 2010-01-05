@@ -4,37 +4,11 @@
  * dibi - tiny'n'smart database abstraction layer
  * ----------------------------------------------
  *
- * Copyright (c) 2005, 2009 David Grudl (http://davidgrudl.com)
- *
- * This source file is subject to the "dibi license" that is bundled
- * with this package in the file license.txt.
- *
- * For more information please see http://dibiphp.com
- *
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @license    http://dibiphp.com/license  dibi license
  * @link       http://dibiphp.com
  * @package    dibi
  */
-
-
-
-/**
- * Interface for user variable, used for generating SQL.
- * @package dibi
- */
-interface IDibiVariable
-{
-	/**
-	 * Format for SQL.
-	 * @param  DibiTranslator
-	 * @param  string  optional modifier
-	 * @return string  SQL code
-	 */
-	function toSql(DibiTranslator $translator, $modifier);
-}
-
-
 
 
 
@@ -106,8 +80,7 @@ interface IDibiProfiler
 /**
  * dibi driver interface.
  *
- * @author     David Grudl
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @package    dibi
  */
 interface IDibiDriver

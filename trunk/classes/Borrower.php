@@ -48,5 +48,10 @@ class Borrower {
     public function Delete() {
         ;
     }
+    public function BorrowedCount() {
+        $db = new Oci8();
+        return $db->BorrowedCount();
+        unset ($db);
+    }
 }
 ?>

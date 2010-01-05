@@ -4,14 +4,7 @@
  * dibi - tiny'n'smart database abstraction layer
  * ----------------------------------------------
  *
- * Copyright (c) 2005, 2009 David Grudl (http://davidgrudl.com)
- *
- * This source file is subject to the "dibi license" that is bundled
- * with this package in the file license.txt.
- *
- * For more information please see http://dibiphp.com
- *
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @license    http://dibiphp.com/license  dibi license
  * @link       http://dibiphp.com
  * @package    dibi
@@ -35,8 +28,7 @@
  * unset($result);
  * </code>
  *
- * @author     David Grudl
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @package    dibi
  */
 class DibiResult extends DibiObject implements IDataSource
@@ -291,13 +283,87 @@ class DibiResult extends DibiObject implements IDataSource
 
 	/**
 	 * Fetches all records from table and returns associative tree.
-	 * Associative descriptor:  assoc1,#,assoc2,=,assoc3,@
-	 * builds a tree:           $data[assoc1][index][assoc2]['assoc3']->value = {record}
+	 * Examples:
+	 * - associative descriptor: col1[]col2->col3
+	 *   builds a tree:          $tree[$val1][$index][$val2]->col3[$val3] = {record}
+	 * - associative descriptor: col1|col2->col3=col4
+	 *   builds a tree:          $tree[$val1][$val2]->col3[$val3] = val4
 	 * @param  string  associative descriptor
 	 * @return DibiRow
 	 * @throws InvalidArgumentException
 	 */
 	final public function fetchAssoc($assoc)
+	{
+		if (strpos($assoc, ',') !== FALSE) {
+			return $this->oldFetchAssoc($assoc);
+		}
+
+		$this->seek(0);
+		$row = $this->fetch();
+		if (!$row) return array();  // empty result set
+
+		$data = NULL;
+		$assoc = preg_split('#(\[\]|->|=|\|)#', $assoc, NULL, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+
+		// check columns
+		foreach ($assoc as $as) {
+			// offsetExists ignores NULL in PHP 5.2.1, isset() surprisingly NULL accepts
+			if ($as !== '[]' && $as !== '=' && $as !== '->' && $as !== '|' && !isset($row[$as])) {
+				throw new InvalidArgumentException("Unknown column '$as' in associative descriptor.");
+			}
+		}
+
+		if ($as === '->') { // must not be last
+			array_pop($assoc);
+		}
+
+		if (empty($assoc)) {
+			$assoc[] = '[]';
+		}
+
+		// make associative tree
+		do {
+			$x = & $data;
+
+			// iterative deepening
+			foreach ($assoc as $i => $as) {
+				if ($as === '[]') { // indexed-array node
+					$x = & $x[];
+
+				} elseif ($as === '=') { // "value" node
+					$x = $row->{$assoc[$i+1]};
+					continue 2;
+
+				} elseif ($as === '->') { // "object" node
+					if ($x === NULL) {
+						$x = clone $row;
+						$x = & $x->{$assoc[$i+1]};
+						$x = NULL; // prepare child node
+					} else {
+						$x = & $x->{$assoc[$i+1]};
+					}
+
+				} elseif ($as !== '|') { // associative-array node
+					$x = & $x[$row->$as];
+				}
+			}
+
+			if ($x === NULL) { // build leaf
+				$x = $row;
+			}
+
+		} while ($row = $this->fetch());
+
+		unset($x);
+		return $data;
+	}
+
+
+
+	/**
+	 * @deprecated
+	 */
+	private function oldFetchAssoc($assoc)
 	{
 		$this->seek(0);
 		$row = $this->fetch();
@@ -305,14 +371,6 @@ class DibiResult extends DibiObject implements IDataSource
 
 		$data = NULL;
 		$assoc = explode(',', $assoc);
-
-		// check columns
-		foreach ($assoc as $as) {
-			// offsetExists ignores NULL in PHP 5.2.1, isset() surprisingly NULL accepts
-			if ($as !== '#' && $as !== '=' && $as !== '@' && !isset($row[$as])) {
-				throw new InvalidArgumentException("Unknown column '$as' in associative descriptor.");
-			}
-		}
 
 		// strip leading = and @
 		$leaf = '@';  // gap
@@ -328,19 +386,16 @@ class DibiResult extends DibiObject implements IDataSource
 			}
 		}
 
-		// make associative tree
 		do {
-			$arr = (array) $row;
 			$x = & $data;
 
-			// iterative deepening
 			foreach ($assoc as $i => $as) {
 				if ($as === '#') { // indexed-array node
 					$x = & $x[];
 
 				} elseif ($as === '=') { // "record" node
 					if ($x === NULL) {
-						$x = $arr;
+						$x = (array) $row;
 						$x = & $x[ $assoc[$i+1] ];
 						$x = NULL; // prepare child node
 					} else {
@@ -358,13 +413,13 @@ class DibiResult extends DibiObject implements IDataSource
 
 
 				} else { // associative-array node
-					$x = & $x[ $arr[ $as ] ];
+					$x = & $x[$row->$as];
 				}
 			}
 
 			if ($x === NULL) { // build leaf
 				if ($leaf === '=') {
-					$x = $arr;
+					$x = (array) $row;
 				} else {
 					$x = $row;
 				}
@@ -561,7 +616,7 @@ class DibiResult extends DibiObject implements IDataSource
 
 		case dibi::DATE:
 		case dibi::DATETIME:
-			if ($value == NULL) { // intentionally ==
+			if ((int) $value === 0) { // '', NULL, FALSE, '0000-00-00', ...
 				return NULL;
 
 			} elseif ($format === NULL) { // return timestamp (default)
@@ -573,12 +628,9 @@ class DibiResult extends DibiObject implements IDataSource
 			} elseif (is_numeric($value)) { // single timestamp
 				return date($format, $value);
 
-			} elseif (class_exists('DateTime', FALSE)) { // since PHP 5.2
-				$value = new DateTime($value);
-				return $value ? $value->format($format) : NULL;
-
 			} else {
-				return date($format, strtotime($value));
+				$value = new DateTime($value);
+				return $value->format($format);
 			}
 
 		case dibi::BOOL:
