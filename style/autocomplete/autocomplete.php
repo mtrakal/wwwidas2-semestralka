@@ -54,7 +54,7 @@ if(isset($_GET['titul']) and $_GET['titul'] != '') {
     foreach ($pom as $variable) {
     // if it starts with 'part' add to results
     //if( strpos($variable, 'amel') === 0 ) {
-        $results[] = "<a href=\"/titul/".$variable['IDFILMU'].".html\">".$variable['ORIGINAL']."</a><div class=\"font-small\"><p>CZ: ".$variable['CZ']."<br />EN:".$variable['EN']."<br />".$variable['POPIS']."&hellip;</p></div>";
+        $results[] = '<a href="/titul/'.$variable['IDFILMU'].'.html">'.$variable['ORIGINAL'].'</a><div class="font-small"><p>CZ: '.$variable['CZ'].'<br />EN:'.$variable['EN'].'<br />'.$variable['POPIS'].'&hellip;</p></div>';
     //}
     };
     unset ($pom);
@@ -66,6 +66,6 @@ if(isset($_GET['titul']) and $_GET['titul'] != '') {
     } else {
         // return the array as json with PHP 5.2
         //var_dump($results);
-        echo json_encode($results);
+        echo json_encode($results, JSON_HEX_TAG|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_HEX_AMP);
     }
 }

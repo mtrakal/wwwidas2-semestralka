@@ -15,7 +15,7 @@ class XMLParse {
         header("Cache-Control: private",false); // požadováno u některých prohlížečů
         header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
         header("Content-type: text/xml");
-        header("Content-Transfer-Encoding: binary");
+        header("Content-Transfer-Encoding: text");
 
         echo '<?xml version="1.0" encoding="UTF-8"?>'."\n<tituly>";
 

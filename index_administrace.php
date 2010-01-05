@@ -60,7 +60,7 @@ if($login->IsAuthorized()) {
                     </li>
                     <li><div>Půjčujícího</div>
                         <ul>
-                            <li><a href="/inc/AddBorrower.php" class="iframe">Přidat</a></li>
+                            <li><a href="/inc/AddBorrower.php" class="iframe add_borrower">Přidat</a></li>
                             <li><a href="#" class="iframe" title="zatím nefunguje">Upravit</a></li>
                             <li><a href="#" class="iframe" title="zatím nefunguje">Odstranit</a></li>
                         </ul>

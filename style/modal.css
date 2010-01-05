@@ -6,110 +6,99 @@
         Purpose of the stylesheet follows.
 */
 * {
-    line-height: 1.4em;
-    margin: 0;
-    padding: 0;
-    font-size: 1em;
-    font-family: Georgia, "Times New Roman", Times, serif;
+	line-height: 1.4em;
+	margin: 0;
+	padding: 0;
+	font-size: 1em;
+	font-family: Georgia, "Times New Roman", Times, serif;
 }
 html, body {
-    margin: 9px 0px 0px 0px;
-    padding: 0;
-    background: #f7f7f7 url('/style/img/img02.jpg') bottom repeat-x;
-    font-size: 14px;
-    color: #5A554E;
-    min-height: 200px;
+	margin: 9px 0px 0px 0px;
+	padding: 0;
+	background: url('/style/img/img02.jpg') #f7f7f7 bottom repeat-x;
+	font-size: 14px;
+	color: #5a554e;
+	min-height: 158px;
 }
 input[type=button], input[type=submit]{
-    font-size: 11px;
-    padding: 1px 5px;
-    margin-top: 10px;
+	font-size: 11px;
+	padding: 1px 5px;
+	margin-top: 10px;
 }
-
 h1, h2, h3 {
-    margin: 0;
-    padding: 0;
-    font-weight: normal;
-    color: #32639A;
-    font-family: Georgia, "Times New Roman", Times, serif;
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+	color: #32639a;
+	font-family: Georgia, "Times New Roman", Times, serif;
 }
-
 h1 {
-    font-size: 2em;
+	font-size: 2em;
 }
-
 h2 {
-    font-size: 1.6em;
+	font-size: 1.6em;
 }
 #modal {
-    margin: 0px auto;
-    text-align: center;
+	margin: 0px auto;
+	text-align: center;
 }
 #modal form {
-    margin: 0px auto;
-    text-align: right;
+	margin: 0px auto;
+	text-align: right;
 }
 #modal input[type=text],
 #modal input[type=password],
 select {
-    border: none;
-    margin: 0px 0px 0px 5px;
-    width: 120px;
+	border: none;
+	margin: 0px 0px 0px 5px;
+	width: 120px;
 }
 #modal input {
-    font-size: 12px;
+	font-size: 12px;
 }
 .center {
-    text-align: center;
+	text-align: center;
 }
 .req {
-    color: #b90000;
-    font-weight: bold;
-}
-#modal form#add_user {
-    width: 230px;
-}
-#modal form#add_address {
-    width: 230px;
+	color: #b90000;
+	font-weight: bold;
 }
 #modal form#add_borrower {
-    width: 230px;
-}
-#modal form#add_genre {
-    width: 230px;
-}
-#modal form#login {
-    width: 230px;
+	width: 230px;
+	height: 170px;
 }
 #modal a {
-    color: #32639a;
+	color: #32639a;
 }
 #modal a:hover {
-    color: #b90000;
+	color: #b90000;
 }
 #modal p.link {
-    margin-top: 40px;
+	margin-top: 40px;
 }
-
-#modal #add_movie {
-    width:550px;
+#modal form#add_movie {
+	width: 550px;
+	height: 482px;
 }
-#modal #add_movie .texyla {
-    text-align: left;
+.texyla {
+	text-align: left;
 }
 .texyla strong, .texyla b {
-    font-weight: bold;
+	font-weight: bold;
 }
 .texyla ul {
-    padding-left: 5px;
-    list-style: disc;
-    list-style-position: inside;
+	padding-left: 5px;
+	list-style: disc;
+	list-style-position: inside;
 }
 .texyla ol {
-    padding-left: 5px;
-    list-style: decimal;
-    list-style-position: inside;
+	padding-left: 5px;
+	list-style: decimal;
+	list-style-position: inside;
 }
 .texyla li {
-    padding-left: 3px;
+	padding-left: 3px;
+}
+#modal form#add_user, #modal form#add_address, #modal form#add_genre, #modal form#login {
+	width: 230px;
 }
