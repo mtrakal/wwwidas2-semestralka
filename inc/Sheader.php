@@ -1,4 +1,6 @@
 <?php
+/* dementní FF a CHROME nechápou, že v XHTML bychom rádi taky používali javascript s psaním do dokumentu...
+
 if ( stristr($_SERVER["HTTP_ACCEPT"],"application/xhtml+xml") ) {
     header("Content-type: application/xhtml+xml");
     echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
@@ -6,6 +8,7 @@ if ( stristr($_SERVER["HTTP_ACCEPT"],"application/xhtml+xml") ) {
 else {
     header("Content-type: text/html");
 }
+*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -18,23 +21,22 @@ else {
         <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
 
         <!-- google loader -->
-        <!--
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript">
             google.load("jquery", "1.3.2");
             google.load("jqueryui", "1.7.2");
         </script>
-        -->
         <!-- google loader_konec -->
 
         <!-- jQUERY -->
+        <!--
         <script type="text/javascript" src="/style/texyla/jquery/jquery.js"></script>
         <script type="text/javascript" src="/style/texyla/jquery/jquery-ui.js"></script>
+        -->
         <!-- jQUERY_konec -->
 
         <!-- AUTOCOMPLETE -->
         <link rel="stylesheet" href="/style/autocomplete/autocomplete.css" type="text/css" media="screen" />
-        <!--<script src="/style/autocomplete/jquery.js" type="text/javascript"></script>-->
         <script src="/style/autocomplete/dimensions.js" type="text/javascript"></script>
         <script src="/style/autocomplete/autocomplete.js" type="text/javascript"></script>
         <!-- AUTOCOMPLETE_konec -->
