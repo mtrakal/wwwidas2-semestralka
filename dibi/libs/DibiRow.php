@@ -4,14 +4,7 @@
  * dibi - tiny'n'smart database abstraction layer
  * ----------------------------------------------
  *
- * Copyright (c) 2005, 2009 David Grudl (http://davidgrudl.com)
- *
- * This source file is subject to the "dibi license" that is bundled
- * with this package in the file license.txt.
- *
- * For more information please see http://dibiphp.com
- *
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @license    http://dibiphp.com/license  dibi license
  * @link       http://dibiphp.com
  * @package    dibi
@@ -22,8 +15,7 @@
 /**
  * Result-set single row.
  *
- * @author     David Grudl
- * @copyright  Copyright (c) 2005, 2009 David Grudl
+ * @copyright  Copyright (c) 2005, 2010 David Grudl
  * @package    dibi
  */
 class DibiRow extends ArrayObject
@@ -48,7 +40,7 @@ class DibiRow extends ArrayObject
 	public function asDate($key, $format = NULL)
 	{
 		$time = $this[$key];
-		if ($time == NULL) { // intentionally ==
+		if ((int) $time === 0) { // '', NULL, FALSE, '0000-00-00', ...
 			return NULL;
 
 		} elseif ($format === NULL) { // return timestamp (default)
@@ -60,12 +52,9 @@ class DibiRow extends ArrayObject
 		} elseif (is_numeric($time)) { // single timestamp
 			return date($format, $time);
 
-		} elseif (class_exists('DateTime', FALSE)) { // since PHP 5.2
-			$time = new DateTime($time);
-			return $time ? $time->format($format) : NULL;
-
 		} else {
-			return date($format, strtotime($time));
+			$time = new DateTime($time);
+			return $time->format($format);
 		}
 	}
 

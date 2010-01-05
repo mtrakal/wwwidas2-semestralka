@@ -281,5 +281,14 @@ where TTITUL.FILM_ID=".$id);
             return $row;
         }
     }
+    public function BorrowedCount() {
+        $result = null;
+        $single = null;
+        if(dibi::isConnected()) {
+            $result= dibi::query("select count(*) from tpujcujici left join tvypujcka on tvypujcka.datum_vraceni is null where tvypujcka.nick = tpujcujici.nick order by tpujcujici.prijmeni");
+            $single = $result->fetchSingle();
+            return $single;
+        }
+    }
 }
 ?>

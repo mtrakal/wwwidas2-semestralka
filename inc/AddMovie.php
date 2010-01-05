@@ -97,7 +97,7 @@
                     <label title="Odkaz na imdb">IMDB:</label><input type="text" name="imdb" /><br />
                     <label class="req" title="Rok vydání">Rok:</label><input type="text" name="rok" /><br />
                     <label class="req">Délka:</label><input type="text" name="delka" /><br />
-                    <label class="req" title="Popis filmu">Popis:</label><textarea name="popis" rows="16" cols="90" id="popis"></textarea>
+                    <label class="req" title="Popis filmu">Popis:</label><textarea name="popis" rows="19" cols="90" id="popis"></textarea>
                 </p>
                 <!--<div class="center"><input type="submit" value="Přidat" /></div>-->
             </form>

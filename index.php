@@ -73,6 +73,13 @@ if($login->IsAuthorized()) {
                         unset ($user);
                         ?>
                     </li>
+                    <li><div>Vypůjčených filmů</div>
+                        <?php
+                        $borrow = new Borrower();
+                        echo $borrow->BorrowedCount();
+                        unset ($borrower);
+                        ?>
+                    </li>
                     <li><div>Nejpůjčovanější filmy</div>
                         <ol>
                             <li>Amélie z Montmartru</li>
