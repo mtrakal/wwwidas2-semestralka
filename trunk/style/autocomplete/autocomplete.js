@@ -141,9 +141,11 @@ function repositionResultsDiv()
 	var sf_width  = acSearchField.width()+400; //trtkal edit
 
 	// apply the css styles - optimized for Firefox
+	/* //T
 	acResultsDiv.css("left", sf_left - 2);
 	acResultsDiv.css("top", sf_top + sf_height + 5);
 	acResultsDiv.css("width", sf_width - 2);
+	*/
 }
 
 

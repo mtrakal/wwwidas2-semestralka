@@ -16,6 +16,17 @@ else {
         <title>IWWW a IDAS2 semestrálka &raquo; Filmotéka</title>
         <link href="/style/screen.css" rel="stylesheet" type="text/css" media="screen" />
         <link href="/style/print.css" rel="stylesheet" type="text/css" media="print" />
+
+        <!-- google loader -->
+        <!--
+        <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("jquery", "1.3.2");
+            google.load("jqueryui", "1.7.2");
+        </script>
+        -->
+        <!-- google loader_konec -->
+
         <!-- jQUERY -->
         <script type="text/javascript" src="/style/texyla/jquery/jquery.js"></script>
         <script type="text/javascript" src="/style/texyla/jquery/jquery-ui.js"></script>
@@ -27,6 +38,7 @@ else {
         <script src="/style/autocomplete/dimensions.js" type="text/javascript"></script>
         <script src="/style/autocomplete/autocomplete.js" type="text/javascript"></script>
         <!-- AUTOCOMPLETE_konec -->
+
         <!-- TEXYLA -->
         <script type="text/javascript" src="/style/texyla/texyla/texyla.js"></script>
         <link rel="stylesheet" type="text/css" href="/style/texyla/texyla/css/style.css" />
@@ -34,15 +46,15 @@ else {
 
         <script type="text/javascript">
             //<![CDATA[
-		$(document).ready(function() {
-			$('a').filter(function() {
-				return this.hostname && this.hostname !== location.hostname;
-			}).addClass('external')
-			.click(function() {
-				window.open(this.href);
-				return false;
-			});
-		});
+            $(document).ready(function() {
+                $('a').filter(function() {
+                    return this.hostname && this.hostname !== location.hostname;
+                }).addClass('external')
+                .click(function() {
+                    window.open(this.href);
+                    return false;
+                });
+            });
 
             $(function () {
                 $.texyla("setDefaults", {
@@ -89,25 +101,11 @@ else {
         <script type="text/javascript" src="/style/colorbox/jquery.colorbox.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
-                //Examples of how to assign the ColorBox event to elements
-                $("a[rel='example1']").colorbox();
-                $("a[rel='example2']").colorbox({transition:"fade"});
-                $("a[rel='example3']").colorbox({transition:"none", width:"75%", height:"75%"});
-                $("a[rel='example4']").colorbox({slideshow:true});
-                $(".single").colorbox({}, function(){
-                    alert('Howdy, this is an example callback.');
-                });
                 $(".colorbox").colorbox();
                 $(".youtube").colorbox({iframe:true, width:650, height:550});
-                $(".iframe").colorbox({width:450, height:280, iframe:true});
+                $(".iframe").colorbox({innerWidth:400, innerHeight: 180, iframe:true});
+                $(".iframe.add_borrower").colorbox({innerWidth:400, innerHeight: 230, iframe:true});
                 $(".iframe.movie").colorbox({width:700, height:600, iframe:true});
-                $(".inline").colorbox({width:"50%", inline:true, href:"#inline_example1"});
-
-                //Example of preserving a JavaScript event for inline calls.
-                $("#click").click(function(){
-                    $('#click').css({"background-color":"#f00", "color":"#fff", "cursor":"inherit"}).text("Open this window again and this message will still be here.");
-                    return false;
-                });
             });
             $(document).ready(function(){$().bind('cbox_closed',function() 
                 {window.document.location.reload();});})
