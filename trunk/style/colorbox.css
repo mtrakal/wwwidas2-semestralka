@@ -90,7 +90,7 @@
     background: url(/style/colorbox/images/controls.png) -211px 0 repeat-y;
 }
 #cboxContent{
-    background: #ffffff;
+    background: url('/style/img/img02.jpg') #f7f7f7 bottom repeat-x;
 }
 #cboxLoadedContent{
     margin-bottom: 5px;
