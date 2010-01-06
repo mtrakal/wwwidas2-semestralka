@@ -1,4 +1,5 @@
 <?php
+require_once dirname(__FILE__) . "/../fautoload.php";
 require_once dirname(__FILE__) . '/HtmlStruct.php';
 require_once dirname(__FILE__) . '/ColorBox.php';
 
