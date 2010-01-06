@@ -23,7 +23,7 @@ else {
         <!-- google loader -->
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript">
-					//<![CDATA[
+	//<![CDATA[
             google.load("jquery", "1.3.2");
             google.load("jqueryui", "1.7.2");
           //]]>
