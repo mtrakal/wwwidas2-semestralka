@@ -23,8 +23,10 @@ else {
         <!-- google loader -->
         <script type="text/javascript" src="http://www.google.com/jsapi"></script>
         <script type="text/javascript">
+					//<![CDATA[
             google.load("jquery", "1.3.2");
             google.load("jqueryui", "1.7.2");
+          //]]>
         </script>
         <!-- google loader_konec -->
 
@@ -95,7 +97,8 @@ else {
 
                 });
             });
-            //]]></script>
+            //]]>
+            </script>
         <!-- TEXYLA_konec -->
         <!-- COLORBOX -->
         <link type="text/css" media="screen" rel="stylesheet" href="/style/colorbox.css" />

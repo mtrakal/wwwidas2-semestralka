@@ -25,6 +25,12 @@ if($login->IsAuthorized()) {
             <!--<p class="meta">Fabuleux destin d'Amélie Poulain, Le</p>-->
             <div class="entry">
                 <ul>
+                    <li><strong>Odkazy</strong>
+                        <ul>
+                            <li><a href="http://code.google.com/p/wwwidas2-semestralka/source/browse/#svn/trunk">SVN zdrojáky</a></li>
+                            <li><a href="http://code.google.com/p/wwwidas2-semestralka/updates/list">SVN změny</a></li>
+                        </ul>
+                    </li>
                     <li><strong>Popis</strong>
                         <ul>
                             <li>Správa osobní filmotéky</li>

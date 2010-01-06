@@ -35,7 +35,7 @@ if(isset($_GET['action'])) {
                 if($login->Authorize($_POST['username'], $_POST['password'])) {
                     echo "<h2>Přihlášení proběhlo v pořádku</h2>";
                 } else {
-                    echo "<h2>Špatný login!</h2><p class=\"link\"><a href=\"/inc/Login.php\"</p>";
+                    echo "<h2>Špatný login!</h2><p class=\"link\"><a href=\"/inc/Login.php\">Přihlásit znovu</a></p>";
                 }
             } else {
                 ?>

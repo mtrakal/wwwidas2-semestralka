@@ -48,7 +48,6 @@
     background: #FFFFFF;
     text-transform: lowercase;
     font: normal 11px Arial, Helvetica, sans-serif;
-    color: #5D781D;
 }
 
 #search-submit {
@@ -56,7 +55,6 @@
     height: 22px;
     border: none;
     background: #B9B9B9;
-    color: #000000;
 }
 
 #banner {
@@ -284,7 +282,6 @@ strong {
     line-height: normal;
     font-size: 12px;
     text-align: center;
-    color: #82A2B9;
 }
 
 #footer a {
